@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)https://developers.google.cn/optimization/scheduling/employee_scheduling -->
+<html lang="en" class="" ml-update="aware"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/linkid.js"></script><script async="" src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/analytics.js"></script><script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script><meta name="xsrf_token" content="64_MSFj_BgWNwY3WO018MSQtE5jzPoVdWtywHZ2WsJA6MTU0NzAxNTY1ODQ2MDE1Mw"><link rel="canonical" href="https://developers.google.com/optimization/scheduling/employee_scheduling"><link rel="alternate" href="https://developers.google.com/optimization/scheduling/employee_scheduling" hreflang="en"><link rel="alternate" href="https://developers.google.cn/optimization/scheduling/employee_scheduling" hreflang="en-cn"><link rel="alternate" href="https://developers.google.com/optimization/scheduling/employee_scheduling" hreflang="x-default"><link rel="shortcut icon" href="https://developers.google.cn/_static/0ee1984e83/images/favicon.png"><link rel="apple-touch-icon" href="https://developers.google.cn/_static/0ee1984e83/images/touch-icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/css"><link rel="stylesheet" href="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/devsite-google-blue.css"><script src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/jquery-bundle.js"></script><meta property="og:site_name" content="Google Developers"><meta property="og:type" content="website"><meta property="og:url" content="https://developers.google.com/optimization/scheduling/employee_scheduling"><meta property="og:locale" content="en"><script>
+    var ___gcfg = ___gcfg || {};
+    ___gcfg.lang = 'zh-cn';
+  </script><title>Employee Scheduling &nbsp;|&nbsp; OR-Tools
+      &nbsp;|&nbsp; Google Developers</title><meta property="og:title" content="Employee Scheduling  |  OR-Tools
+       |  Google Developers"><script src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head><body class="devsite-doc-page devsite-header-no-upper-tabs no-touch" data-family="endorsed" id="top_of_page"><div id="MathJax_Message" style="display: none;"></div><div class="devsite-wrapper" style="margin-top: 0px;"><div class="devsite-top-section-wrapper
+            "><header class="devsite-top-section nocontent devsite-top-section-pinned"><div class="devsite-top-logo-row-wrapper-wrapper" style="position: relative;"><div class="devsite-top-logo-row-wrapper"><div class="devsite-top-logo-row devsite-full-site-width"><button type="button" class="devsite-expand-section-nav devsite-header-icon-button
+                                       button-flat material-icons gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Hamburger menu"></button><div class="devsite-product-name-wrapper"><a class="devsite-product-name-link gc-analytics-event" href="https://developers.google.cn/optimization/" data-category="Site-Wide Custom Events" data-label="Project logo (header)"><img src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/orLogo.png" class="devsite-product-logo" alt="Google OR-Tools"></a><span class="devsite-product-name"><ul class="devsite-breadcrumb-list"><li class="devsite-breadcrumb-item"><a href="https://developers.google.cn/optimization/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Upper Header" data-value="1">
+    
+    
+      
+        Google OR-Tools
+      
+    
+    
+    </a></li></ul></span></div><div class="devsite-header-upper-tabs"></div><form class="devsite-search-form" action="https://developers.google.cn/s/results/" method="GET" id="top-search" search-placeholder="搜索"><div id="searchbox" class="devsite-searchbox"><input placeholder="搜索" type="text" class="devsite-search-field devsite-search-query" name="q" value="" autocomplete="off" aria-label="搜索框"><div class="devsite-search-image material-icons"></div></div><input type="hidden" name="p" id="search_project" value="/optimization/" data-project-name="OR-Tools" data-project-path="/optimization/" data-query-match=""><input type="hidden" class="suggest-project" value="OR-Tools"><div class="suggest-project-metadata" data-home_url="/optimization/" data-path="/optimization/" data-name="OR-Tools"></div><div class="devsite-popout devsite-popout-closed"><div class="devsite-suggest-results" style="display: none;"></div></div></form><a class="devsite-header-link devsite-top-button button gc-analytics-event" href="https://developers.google.cn/products/" data-category="Site-Wide Custom Events" data-label="Site header link" track-type="globalNav" track-name="所有产品" track-metadata-position="nav" track-metadata-eventdetail="nav"><div class="devsite-header-link-icon material-icons">
+                  list
+                </div><div class="devsite-header-link-label">所有产品</div></a><button type="button" class="devsite-search-button devsite-header-icon-button button-flat
+                                       material-icons"></button></div></div></div><div class="devsite-collapsible-section" style="margin-top: 0px;"><div class="devsite-header-background devsite-full-site-width"><div class="devsite-doc-set-nav-row devsite-full-site-width"><nav class="devsite-doc-set-nav devsite-nav devsite-overflow-tabs-scroll-wrapper"><ul class="devsite-doc-set-nav-tab-list devsite-overflow-tabs-scroll" style="min-width: 550px; left: 0px;"><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: 首页">
+          首页
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/install" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Installation">
+          Installation
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-doc-set-nav-active devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" aria-label="Guides, selected" data-category="Site-Wide Custom Events" data-label="Tab: Guides">
+          Guides
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/reference" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Reference">
+          Reference
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/support/overview" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Support">
+          Support
+        </a></li></ul><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-forward devsite-hidden" aria-label="滚动标签"></button><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-back devsite-hidden" aria-label="滚动标签"></button></nav></div></div></div></header><script>
+    if (window.jQuery) {
+      $(document).ready(function() {
+        if (window.devsite && window.devsite.search) {
+          
+          window.devsite.search.init('zh-cn')
+        }
+      });
+    }
+  </script></div><div id="gc-wrapper" itemscope="" itemtype="http://schema.org/Article"><input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {}, &quot;gaid&quot;: &quot;UA-10115507-7&quot;}"><input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;OR-Tools&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-24532603-11&quot;}"><script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "CN", "language": {"requested": "zh-cn", "served": "en"}, "projectName": "OR-Tools", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+
+      
+        <div class="devsite-site-mask"></div>
+        
+  
+
+
+<nav class="devsite-nav-responsive devsite-nav nocontent" tabindex="0" style="left: -256px;">
+  
+  <div class="devsite-nav-responsive-tabs-panel devsite-nav-responsive-transition devsite-nav-responsive-transform" style="display: none;">
+    
+      
+
+
+
+<nav class="devsite-nav-responsive-tabs devsite-nav">
+  <ul class="devsite-nav-list">
+  
+
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: 首页"><span>
+          首页
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/install?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Installation"><span>
+          Installation
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <span class="devsite-nav-responsive-forward devsite-nav-responsive-tab devsite-nav-title
+                     devsite-nav-active gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: Guides" tabindex="0"><span>
+          Guides
+        </span></span>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/reference" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Reference"><span>
+          Reference
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/support/overview?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Support"><span>
+          Support
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      <a href="https://developers.google.cn/products/" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: all_products"><span>
+        所有产品
+      </span></a>
+    </li>
+  
+  </ul>
+</nav>
+
+
+    
+  </div>
+  
+  
+  <div class="devsite-nav-responsive-sidebar-panel" style="display: block;">
+    
+    <div class="devsite-nav-responsive-back" tabindex="0"></div>
+    
+    <nav class="devsite-nav-responsive-sidebar">
+      
+      
+    <ul class="devsite-nav-list devsite-nav-expandable devsite-nav-only-accordions"><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Introduction, click to expand/collapse" role="link" tabindex="0"><span>Introduction</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-nav-title"><span>About Combinatorial Optimization</span></a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Get Started with OR-Tools, click to expand/collapse" role="link" tabindex="0"><span>Get Started with OR-Tools</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="1" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/get_started" class="devsite-nav-title"><span>概览</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cpp" class="devsite-nav-title"><span>C++</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python" class="devsite-nav-title"><span>Python</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/java" class="devsite-nav-title"><span>Java</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cs" class="devsite-nav-title"><span>C#</span></a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Linear Optimization, click to expand/collapse" role="link" tabindex="0"><span>Linear Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/glop" class="devsite-nav-title"><span>The Glop Linear Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/add-on" class="devsite-nav-title"><span>Add-on for Google Sheets</span></a></li><li class="devsite-nav-item devsite-nav-external devsite-nav-has-status"><a href="https://developers.google.cn/apps-script/reference/optimization" class="devsite-nav-title"><span class="devsite-nav-text"><span>Service for Apps Script</span></span><span class="devsite-nav-icon-wrapper"><span class="devsite-nav-icon material-icons" data-tooltip-align="b,c" data-tooltip="外部" aria-label="外部" data-title="外部"></span></span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Constraint Optimization, click to expand/collapse" role="link" tabindex="0"><span>Constraint Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_solver" class="devsite-nav-title"><span>CP-SAT Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/original_cp_solver" class="devsite-nav-title"><span>Original CP Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cryptarithmetic" class="devsite-nav-title"><span>Cryptarithmetic</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/queens" class="devsite-nav-title"><span>The N-queens Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_tasks" class="devsite-nav-title"><span>Setting Solver Limits</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Integer Optimization, click to expand/collapse" role="link" tabindex="0"><span>Integer Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt" class="devsite-nav-title"><span>Mixed-Integer Programming</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp" class="devsite-nav-title"><span>CP Approach to Integer Optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/sudoku" class="devsite-nav-title"><span>Sudoku Add-on for Google Sheets</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Routing, click to expand/collapse" role="link" tabindex="0"><span>Routing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/tsp" class="devsite-nav-title"><span>Traveling Salesman Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/vrp" class="devsite-nav-title"><span>Vehicle Routing Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrp" class="devsite-nav-title"><span>Capacity Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw" class="devsite-nav-title"><span>Time Window Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw_resources" class="devsite-nav-title"><span>Resource Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/penalties" class="devsite-nav-title"><span>Dropping Visits in Infeasible Problems-Penalties</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_tasks" class="devsite-nav-title"><span>Common Vehicle Routing Tasks</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_options" class="devsite-nav-title"><span>Routing Options</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/google_direction" class="devsite-nav-title"><span>Google Direction API</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Bin Packing, click to expand/collapse" role="link" tabindex="0"><span>Bin Packing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin/knapsack" class="devsite-nav-title"><span>Knapsacks</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Network Flows, click to expand/collapse" role="link" tabindex="0"><span>Network Flows</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/maxflow" class="devsite-nav-title"><span>Maximum Flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/mincostflow" class="devsite-nav-title"><span>Minimum Cost Flows</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Assignment, click to expand/collapse" role="link" tabindex="0"><span>Assignment</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/simple_assignment" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_min_cost_flow" class="devsite-nav-title"><span>Assignment as a Min Cost Flow Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_mip" class="devsite-nav-title"><span>Assignment as a MIP Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_cp" class="devsite-nav-title"><span>Assignment with Task Sizes</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_groups" class="devsite-nav-title"><span>Assignment with Allowed Groups</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Scheduling, click to expand/collapse" role="link" tabindex="0"><span>Scheduling</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling" class="devsite-nav-title"><span>Employee Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/job_shop" class="devsite-nav-title"><span>The Job Shop Problem</span></a></li></ul></li></ul></nav>
+  </div>
+  
+  
+</nav>
+
+
+        <div class="devsite-main-content clearfix" style="margin-top: 136px;">
+
+        
+        
+
+        
+  
+  
+    
+    
+      
+  <nav class="devsite-section-nav devsite-nav nocontent" style="left: auto; max-height: 544px; position: relative; top: 0px;">
+    <ul class="devsite-nav-list devsite-nav-expandable devsite-nav-only-accordions"><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Introduction, click to expand/collapse" role="link" tabindex="0"><span>Introduction</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-nav-title"><span>About Combinatorial Optimization</span></a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Get Started with OR-Tools, click to expand/collapse" role="link" tabindex="0"><span>Get Started with OR-Tools</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="1" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/get_started" class="devsite-nav-title"><span>概览</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cpp" class="devsite-nav-title"><span>C++</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python" class="devsite-nav-title"><span>Python</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/java" class="devsite-nav-title"><span>Java</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cs" class="devsite-nav-title"><span>C#</span></a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Linear Optimization, click to expand/collapse" role="link" tabindex="0"><span>Linear Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/glop" class="devsite-nav-title"><span>The Glop Linear Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/add-on" class="devsite-nav-title"><span>Add-on for Google Sheets</span></a></li><li class="devsite-nav-item devsite-nav-external devsite-nav-has-status"><a href="https://developers.google.cn/apps-script/reference/optimization" class="devsite-nav-title"><span class="devsite-nav-text"><span>Service for Apps Script</span></span><span class="devsite-nav-icon-wrapper"><span class="devsite-nav-icon material-icons" data-tooltip-align="b,c" data-tooltip="外部" aria-label="外部" data-title="外部"></span></span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Constraint Optimization, click to expand/collapse" role="link" tabindex="0"><span>Constraint Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_solver" class="devsite-nav-title"><span>CP-SAT Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/original_cp_solver" class="devsite-nav-title"><span>Original CP Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cryptarithmetic" class="devsite-nav-title"><span>Cryptarithmetic</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/queens" class="devsite-nav-title"><span>The N-queens Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_tasks" class="devsite-nav-title"><span>Setting Solver Limits</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Integer Optimization, click to expand/collapse" role="link" tabindex="0"><span>Integer Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt" class="devsite-nav-title"><span>Mixed-Integer Programming</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp" class="devsite-nav-title"><span>CP Approach to Integer Optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/sudoku" class="devsite-nav-title"><span>Sudoku Add-on for Google Sheets</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Routing, click to expand/collapse" role="link" tabindex="0"><span>Routing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/tsp" class="devsite-nav-title"><span>Traveling Salesman Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/vrp" class="devsite-nav-title"><span>Vehicle Routing Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrp" class="devsite-nav-title"><span>Capacity Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw" class="devsite-nav-title"><span>Time Window Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw_resources" class="devsite-nav-title"><span>Resource Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/penalties" class="devsite-nav-title"><span>Dropping Visits in Infeasible Problems-Penalties</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_tasks" class="devsite-nav-title"><span>Common Vehicle Routing Tasks</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_options" class="devsite-nav-title"><span>Routing Options</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/google_direction" class="devsite-nav-title"><span>Google Direction API</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Bin Packing, click to expand/collapse" role="link" tabindex="0"><span>Bin Packing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin/knapsack" class="devsite-nav-title"><span>Knapsacks</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Network Flows, click to expand/collapse" role="link" tabindex="0"><span>Network Flows</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/maxflow" class="devsite-nav-title"><span>Maximum Flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/mincostflow" class="devsite-nav-title"><span>Minimum Cost Flows</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Assignment, click to expand/collapse" role="link" tabindex="0"><span>Assignment</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/simple_assignment" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_min_cost_flow" class="devsite-nav-title"><span>Assignment as a Min Cost Flow Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_mip" class="devsite-nav-title"><span>Assignment as a MIP Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_cp" class="devsite-nav-title"><span>Assignment with Task Sizes</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_groups" class="devsite-nav-title"><span>Assignment with Allowed Groups</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Scheduling, click to expand/collapse" role="link" tabindex="0"><span>Scheduling</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling" class="devsite-nav-title"><span>Employee Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/job_shop" class="devsite-nav-title"><span>The Job Shop Problem</span></a></li></ul></li></ul>
+  </nav>
+
+    
+
+    
+  <nav class="devsite-page-nav devsite-nav" style="position: relative; left: auto; max-height: 544px; top: 0px;"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#top_of_page" class="devsite-nav-title"><span>目录</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#nurse_scheduling" class="devsite-nav-title"><span>A nurse scheduling problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#python" class="devsite-nav-title"><span>A Python solution.<wbr></span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#data" class="devsite-nav-title"><span>Data for the example</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#solver" class="devsite-nav-title"><span>Create the variables</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#all_different" class="devsite-nav-title"><span>Assign nurses to shifts</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#at_most_two_nurses" class="devsite-nav-title"><span>Assign shifts evenly</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#solve" class="devsite-nav-title"><span>Call the solver and display the results</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#program" class="devsite-nav-title"><span>The entire program</span></a></li></ul></li></ul></nav>
+
+
+      <article class="devsite-article">
+        <article class="devsite-article-inner">
+  
+          
+  
+
+
+<div class="devsite-rating-container
+            "><div class="devsite-rating-stars"><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="1" data-category="Site-Wide Custom Events" data-label="Star Rating 1" track-metadata-score="1" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：1 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="2" data-category="Site-Wide Custom Events" data-label="Star Rating 2" track-metadata-score="2" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：2 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="3" data-category="Site-Wide Custom Events" data-label="Star Rating 3" track-metadata-score="3" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：3 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="4" data-category="Site-Wide Custom Events" data-label="Star Rating 4" track-metadata-score="4" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：4 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="5" data-category="Site-Wide Custom Events" data-label="Star Rating 5" track-metadata-score="5" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：5 星（最高 5 星）"></div></div><div class="devsite-rating-description"></div><div class="devsite-rating-internal"><span class="devsite-rating-stats"></span></div></div><script>
+  $(document).ready(function() {
+    devsite.ratings.init(
+      document.querySelectorAll('#devsite-feedback-project'), false
+      
+    );
+  });
+</script>
+
+
+  
+  <nav class="devsite-breadcrumb-nav devsite-nav">
+    
+
+
+<ul class="devsite-breadcrumb-list">
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <a href="https://developers.google.cn/products/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1">
+    
+    
+      产品
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://developers.google.cn/optimization/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2">
+    
+    
+      OR-Tools
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="3">
+    
+    
+      Guides
+    
+    
+    </a>
+    
+  </li>
+  
+</ul>
+
+  </nav>
+  
+  
+  <h1 itemprop="name" class="devsite-page-title">
+    Employee Scheduling
+  </h1>
+  
+  
+  <nav class="devsite-page-nav-embedded devsite-nav"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#top_of_page" class="devsite-nav-title"><span>目录</span></a><button type="button" class="devsite-nav-show-all button-transparent material-icons" data-tooltip-align="b,c" data-tooltip="展开/收起内容" aria-label="展开/收起内容" data-title="展开/收起内容"></button></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#nurse_scheduling" class="devsite-nav-title"><span>A nurse scheduling problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#python" class="devsite-nav-title"><span>A Python solution.<wbr></span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#data" class="devsite-nav-title"><span>Data for the example</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#solver" class="devsite-nav-title"><span>Create the variables</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#all_different" class="devsite-nav-title devsite-nav-item-hidden"><span>Assign nurses to shifts</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#at_most_two_nurses" class="devsite-nav-title devsite-nav-item-hidden"><span>Assign shifts evenly</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#solve" class="devsite-nav-title devsite-nav-item-hidden"><span>Call the solver and display the results</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#program" class="devsite-nav-title devsite-nav-item-hidden"><span>The entire program</span></a></li></ul></li><li class="devsite-nav-item"><button type="button" class="button-flat devsite-nav-more-items material-icons" aria-hidden="true" data-tooltip-align="b,c" data-tooltip="展开/收起内容" aria-label="展开/收起内容" data-title="展开/收起内容"></button></li></ul></nav>
+  
+  <div class="devsite-article-body clearfix
+            " itemprop="articleBody">
+    
+    <p>Organizations whose employees work multiple shifts often face the challenge of
+scheduling sufficient workers on each shift. Typically, the schedules will have
+constraints, such as "no employee should work two shifts in a row". Finding a schedule
+that satisfies all constraints can be computationally difficult.</p>
+      <p>The following sections present
+      an example of an employee scheduling problem, and show how to solve it
+      using the <a href="https://developers.google.cn/optimization/cp/cp_solver">CP-SAT solver</a>.</p>
+
+    <h2 id="nurse_scheduling"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>A nurse scheduling problem</h2>
+     <p>In the next example, a hospital supervisor needs to create a schedule for four nurses over
+     a three-day period, subject to the following conditions:</p>
+    <ul>
+      <li>Each day is divided into three 8-hour shifts.</li>
+      <li>Every day, each shift is assigned to a single nurse, and no nurse works more than one
+          shift.
+       </li><li>Each nurse is assigned to at least two shifts during the three-day period.</li>
+    </ul>
+
+    <h2 id="python"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>A Python solution.</h2>
+    <p>The following sections present a Python solution to the nurse scheduling problem.</p>
+
+    <h3 id="data">Data for the example</h3>
+    <p>The following code creates the data for the example.</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; &nbsp; num_nurses </span><span class="pun">=</span><span class="pln"> </span><span class="lit">4</span><span class="pln"><br>&nbsp; &nbsp; num_shifts </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pln"><br>&nbsp; &nbsp; num_days </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pln"><br>&nbsp; &nbsp; all_nurses </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">num_nurses</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; all_shifts </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">num_shifts</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; all_days </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">num_days</span><span class="pun">)</span></pre>
+
+    <h3 id="solver">Create the variables</h3>
+    <p>The following code an array of variables for the
+      problem.</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; &nbsp; shifts </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{}</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewBoolVar</span><span class="pun">(</span><span class="str">'shift_n%id%is%i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s</span><span class="pun">))</span></pre>
+    <p>The array defines assignments for shifts to nurses as follows:</p>
+    <p><code>shifts[(n, d, s)]</code> equals 1 if shift s is assigned to nurse n on day d, and
+      0 otherwise.</p>
+
+    <h3 id="all_different">Assign nurses to shifts</h3>
+    <p>Next, we show how to assign nurses to shifts subject to the following constraints:</p>
+    <ul>
+       <li>Each shift is assigned to a single nurse per day.</li>
+       <li>Each nurse works at most one shift per day.</li>
+    </ul>
+     <p>Here's the code that creates the first condition.</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">sum</span><span class="pun">(</span><span class="pln">shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">)</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></pre>
+    <p>The last line says that for each shift, the sum of the nurses assigned to that shift is 1.</p>
+    <p>Next, here's the code that requires that each nurse works at most one shift per day.</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">sum</span><span class="pun">(</span><span class="pln">shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></pre>
+    <p>For each nurse, the sum of shifts assigned to that nurse is at most 1 ("at most"
+      because a nurse might have the day off).</p>
+
+    <h3 id="at_most_two_nurses">Assign shifts evenly</h3>
+    <p>Next, we show how to assign shifts to nurses as evenly as possible.
+    Since there are nine
+    shifts over the three-day period, we can assign two shifts to each of the four nurses.
+    After that there will be one shift left over, which can be assigned to any nurse.</p>
+    <p>The following code ensures that each nurse works at least two shifts in the three-day
+    period.</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; &nbsp; </span><span class="com"># min_shifts_per_nurse is the largest integer such that every nurse</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># can be assigned at least that many shifts. If the number of nurses doesn't</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># divide the total number of shifts over the schedule period,</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># some nurses have to work one more shift, for a total of</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># min_shifts_per_nurse + 1.</span><span class="pln"><br>&nbsp; &nbsp; min_shifts_per_nurse </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">num_shifts </span><span class="pun">*</span><span class="pln"> num_days</span><span class="pun">)</span><span class="pln"> </span><span class="pun">//</span><span class="pln"> num_nurses<br>&nbsp; &nbsp; max_shifts_per_nurse </span><span class="pun">=</span><span class="pln"> min_shifts_per_nurse </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; num_shifts_worked </span><span class="pun">=</span><span class="pln"> sum</span><span class="pun">(</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">min_shifts_per_nurse </span><span class="pun">&lt;=</span><span class="pln"> num_shifts_worked</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">num_shifts_worked </span><span class="pun">&lt;=</span><span class="pln"> max_shifts_per_nurse</span><span class="pun">)</span></pre>
+    <p>Since there are <code>num_shifts * num_days</code> total shifts in the schedule period,
+    you can assign at least</p>
+    <pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div>(num_shifts * num_days) // num_nurses</pre>
+    <p>shifts to each nurse, but some shifts may be left over. (Here
+    <code>//</code> is the Python integer division operator, which returns the floor of the usual
+    quotient.)</p>
+    <p>For the given values of <code>num_nurses = 4</code>, <code>num_shifts = 3</code>,
+    and <code>num_days = 3</code>, the expression
+    <code>min_shifts_per_nurse</code> has the value
+    <code>(3&nbsp;*&nbsp;3&nbsp;//&nbsp;4)&nbsp;=&nbsp;2</code>, so you can assign at least two
+    shifts to each nurse. This is guaranteed by the constraint</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">min_shifts_per_nurse </span><span class="pun">&lt;=</span><span class="pln"> num_shifts_worked</span><span class="pun">)</span></pre>
+    <p>Since there are nine total shifts over the three-day period, there is one remaining
+    shift after assigning two shifts to each nurse. The extra shift can be assigned to any nurse.</p>
+    <p>The last line</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">num_shifts_worked </span><span class="pun">&lt;=</span><span class="pln"> max_shifts_per_nurse</span><span class="pun">)</span></pre>
+    <p>ensures that no nurse is assigned more than one extra shift.
+    The constraint
+    isn't necessary in this case, because there's only one extra shift. But for different
+    parameter values, there could be several extra shifts, in which case the constraint is
+    necessary.</p>
+
+    <h3 id="solve">Call the solver and display the results</h3>
+    <p>The following code calls the solver and displays the first five solutions.</p>
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; &nbsp; solver </span><span class="pun">=</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="typ">CpSolver</span><span class="pun">()</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># Display the first five solutions.</span><span class="pln"><br>&nbsp; &nbsp; a_few_solutions </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">5</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; solution_printer </span><span class="pun">=</span><span class="pln"> </span><span class="typ">NursesPartialSolutionPrinter</span><span class="pun">(</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; shifts</span><span class="pun">,</span><span class="pln"> num_nurses</span><span class="pun">,</span><span class="pln"> num_days</span><span class="pun">,</span><span class="pln"> num_shifts</span><span class="pun">,</span><span class="pln"> a_few_solutions</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; solver</span><span class="pun">.</span><span class="typ">SearchForAllSolutions</span><span class="pun">(</span><span class="pln">model</span><span class="pun">,</span><span class="pln"> solution_printer</span><span class="pun">)</span></pre>
+    <p>Here are the first five solutions.</p>
+    <pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div>Solution 1
+Day 0
+  Nurse 0 works shift 2
+  Nurse 1 works shift 0
+  Nurse 2 works shift 1
+  Nurse 3 does not work
+Day 1
+  Nurse 0 works shift 0
+  Nurse 1 works shift 1
+  Nurse 2 does not work
+  Nurse 3 works shift 2
+Day 2
+  Nurse 0 does not work
+  Nurse 1 works shift 2
+  Nurse 2 works shift 1
+  Nurse 3 works shift 0
+
+Solution 2
+Day 0
+  Nurse 0 works shift 2
+  Nurse 1 works shift 0
+  Nurse 2 works shift 1
+  Nurse 3 does not work
+Day 1
+  Nurse 0 works shift 0
+  Nurse 1 works shift 1
+  Nurse 2 does not work
+  Nurse 3 works shift 2
+Day 2
+  Nurse 0 works shift 2
+  Nurse 1 does not work
+  Nurse 2 works shift 1
+  Nurse 3 works shift 0
+
+Solution 3
+Day 0
+  Nurse 0 works shift 2
+  Nurse 1 works shift 0
+  Nurse 2 works shift 1
+  Nurse 3 does not work
+Day 1
+  Nurse 0 does not work
+  Nurse 1 works shift 1
+  Nurse 2 works shift 0
+  Nurse 3 works shift 2
+Day 2
+  Nurse 0 works shift 2
+  Nurse 1 does not work
+  Nurse 2 works shift 1
+  Nurse 3 works shift 0
+
+Solution 4
+Day 0
+  Nurse 0 works shift 2
+  Nurse 1 works shift 0
+  Nurse 2 works shift 1
+  Nurse 3 does not work
+Day 1
+  Nurse 0 works shift 1
+  Nurse 1 does not work
+  Nurse 2 works shift 0
+  Nurse 3 works shift 2
+Day 2
+  Nurse 0 does not work
+  Nurse 1 works shift 2
+  Nurse 2 works shift 1
+  Nurse 3 works shift 0
+
+
+Statistics
+  - conflicts       : 584
+  - branches        : 57772
+  - wall time       : 0.760523 ms
+  - solutions found : 5184</pre>
+    <p>The total number of solutions is 5184. The following
+    counting argument explains why.</p>
+    <p>First,
+    there are 4 choices for the one nurse who works an extra shift.
+    Having chosen that nurse, there are 3 shifts the nurse can be assigned to on each of the
+    3 days, so the number of possible ways to assign the nurse with the extra shift is
+    4 · 3<sup>3</sup> = 108. After assigning this nurse, there are two remaining
+    unassigned shifts on each day.</p>
+    <p>Of the remaining three nurses, one works days 0 and 1, one works days 0 and 2, and one
+    works days 1 and 2.
+    There are 3! = 6 ways to assign the nurses to these days, as shown in the diagram below.
+    (The three nurses are labeled A, B, and C, and we have not yet assigned them to
+    shifts.)</p>
+    <pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div>    Day 0    Day 1    Day 2
+     A B      A C      B C
+     A B      B C      A C
+     A C      A B      B C
+     A C      B C      A B
+     B C      A B      A C
+     B C      A C      A B</pre>
+
+    <p>For each row in the above diagram, there are 2<sup>3</sup> = 8 possible
+    ways to assign the remaining shifts to the nurses (two choices on each day).
+    So the total number of possible assignments is 108·6·8 = 5184.</p>
+
+    <h3 id="program">The entire program</h3>
+    <p>Here is the entire program for the nurse scheduling problem.
+    </p><pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="kwd">from</span><span class="pln"> __future__ </span><span class="kwd">import</span><span class="pln"> division<br></span><span class="kwd">from</span><span class="pln"> __future__ </span><span class="kwd">import</span><span class="pln"> print_function<br></span><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">sat</span><span class="pun">.</span><span class="pln">python </span><span class="kwd">import</span><span class="pln"> cp_model<br><br><br><br></span><span class="kwd">class</span><span class="pln"> </span><span class="typ">NursesPartialSolutionPrinter</span><span class="pun">(</span><span class="pln">cp_model</span><span class="pun">.</span><span class="typ">CpSolverSolutionCallback</span><span class="pun">):</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="str">"""Print intermediate solutions."""</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="kwd">def</span><span class="pln"> __init__</span><span class="pun">(</span><span class="pln">self</span><span class="pun">,</span><span class="pln"> shifts</span><span class="pun">,</span><span class="pln"> num_nurses</span><span class="pun">,</span><span class="pln"> num_days</span><span class="pun">,</span><span class="pln"> num_shifts</span><span class="pun">,</span><span class="pln"> sols</span><span class="pun">):</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; cp_model</span><span class="pun">.</span><span class="typ">CpSolverSolutionCallback</span><span class="pun">.</span><span class="pln">__init__</span><span class="pun">(</span><span class="pln">self</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; self</span><span class="pun">.</span><span class="pln">_shifts </span><span class="pun">=</span><span class="pln"> shifts<br>&nbsp; &nbsp; &nbsp; &nbsp; self</span><span class="pun">.</span><span class="pln">_num_nurses </span><span class="pun">=</span><span class="pln"> num_nurses<br>&nbsp; &nbsp; &nbsp; &nbsp; self</span><span class="pun">.</span><span class="pln">_num_days </span><span class="pun">=</span><span class="pln"> num_days<br>&nbsp; &nbsp; &nbsp; &nbsp; self</span><span class="pun">.</span><span class="pln">_num_shifts </span><span class="pun">=</span><span class="pln"> num_shifts<br>&nbsp; &nbsp; &nbsp; &nbsp; self</span><span class="pun">.</span><span class="pln">_solutions </span><span class="pun">=</span><span class="pln"> set</span><span class="pun">(</span><span class="pln">sols</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; self</span><span class="pun">.</span><span class="pln">_solution_count </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="kwd">def</span><span class="pln"> on_solution_callback</span><span class="pun">(</span><span class="pln">self</span><span class="pun">):</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; self</span><span class="pun">.</span><span class="pln">_solution_count </span><span class="pun">+=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_solution_count </span><span class="kwd">in</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_solutions</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Solution %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_solution_count</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">self</span><span class="pun">.</span><span class="pln">_num_days</span><span class="pun">):</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Day %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> d</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">self</span><span class="pun">.</span><span class="pln">_num_nurses</span><span class="pun">):</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; is_working </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">False</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">self</span><span class="pun">.</span><span class="pln">_num_shifts</span><span class="pun">):</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> self</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">self</span><span class="pun">.</span><span class="pln">_shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]):</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; is_working </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">True</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">' &nbsp;Nurse %i works shift %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> is_working</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">' &nbsp;Nurse {} does not work'</span><span class="pun">.</span><span class="pln">format</span><span class="pun">(</span><span class="pln">n</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">()</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="kwd">def</span><span class="pln"> solution_count</span><span class="pun">(</span><span class="pln">self</span><span class="pun">):</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> self</span><span class="pun">.</span><span class="pln">_solution_count<br><br><br><br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># Data.</span><span class="pln"><br>&nbsp; &nbsp; num_nurses </span><span class="pun">=</span><span class="pln"> </span><span class="lit">4</span><span class="pln"><br>&nbsp; &nbsp; num_shifts </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pln"><br>&nbsp; &nbsp; num_days </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pln"><br>&nbsp; &nbsp; all_nurses </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">num_nurses</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; all_shifts </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">num_shifts</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; all_days </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="pln">num_days</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># Creates the model.</span><span class="pln"><br>&nbsp; &nbsp; model </span><span class="pun">=</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="typ">CpModel</span><span class="pun">()</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com"># Creates shift variables.</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># shifts[(n, d, s)]: nurse 'n' works shift 's' on day 'd'.</span><span class="pln"><br>&nbsp; &nbsp; shifts </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{}</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewBoolVar</span><span class="pun">(</span><span class="str">'shift_n%id%is%i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; s</span><span class="pun">))</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com"># Each shift is assigned to exactly one nurse in the schedule period.</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">sum</span><span class="pun">(</span><span class="pln">shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">)</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com"># Each nurse works at most one shift per day.</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">sum</span><span class="pun">(</span><span class="pln">shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com"># min_shifts_per_nurse is the largest integer such that every nurse</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># can be assigned at least that many shifts. If the number of nurses doesn't</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># divide the total number of shifts over the schedule period,</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># some nurses have to work one more shift, for a total of</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># min_shifts_per_nurse + 1.</span><span class="pln"><br>&nbsp; &nbsp; min_shifts_per_nurse </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="pln">num_shifts </span><span class="pun">*</span><span class="pln"> num_days</span><span class="pun">)</span><span class="pln"> </span><span class="pun">//</span><span class="pln"> num_nurses<br>&nbsp; &nbsp; max_shifts_per_nurse </span><span class="pun">=</span><span class="pln"> min_shifts_per_nurse </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> n </span><span class="kwd">in</span><span class="pln"> all_nurses</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; num_shifts_worked </span><span class="pun">=</span><span class="pln"> sum</span><span class="pun">(</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shifts</span><span class="pun">[(</span><span class="pln">n</span><span class="pun">,</span><span class="pln"> d</span><span class="pun">,</span><span class="pln"> s</span><span class="pun">)]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> d </span><span class="kwd">in</span><span class="pln"> all_days </span><span class="kwd">for</span><span class="pln"> s </span><span class="kwd">in</span><span class="pln"> all_shifts</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">min_shifts_per_nurse </span><span class="pun">&lt;=</span><span class="pln"> num_shifts_worked</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">num_shifts_worked </span><span class="pun">&lt;=</span><span class="pln"> max_shifts_per_nurse</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com"># Creates the solver and solve.</span><span class="pln"><br>&nbsp; &nbsp; solver </span><span class="pun">=</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="typ">CpSolver</span><span class="pun">()</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># Display the first five solutions.</span><span class="pln"><br>&nbsp; &nbsp; a_few_solutions </span><span class="pun">=</span><span class="pln"> range</span><span class="pun">(</span><span class="lit">5</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; solution_printer </span><span class="pun">=</span><span class="pln"> </span><span class="typ">NursesPartialSolutionPrinter</span><span class="pun">(</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; shifts</span><span class="pun">,</span><span class="pln"> num_nurses</span><span class="pun">,</span><span class="pln"> num_days</span><span class="pun">,</span><span class="pln"> num_shifts</span><span class="pun">,</span><span class="pln"> a_few_solutions</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; solver</span><span class="pun">.</span><span class="typ">SearchForAllSolutions</span><span class="pun">(</span><span class="pln">model</span><span class="pun">,</span><span class="pln"> solution_printer</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; &nbsp; </span><span class="com"># Statistics.</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">()</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Statistics'</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">' &nbsp;- conflicts &nbsp; &nbsp; &nbsp; : %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumConflicts</span><span class="pun">())</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">' &nbsp;- branches &nbsp; &nbsp; &nbsp; &nbsp;: %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumBranches</span><span class="pun">())</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">' &nbsp;- wall time &nbsp; &nbsp; &nbsp; : %f ms'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">WallTime</span><span class="pun">())</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">' &nbsp;- solutions found : %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> solution_printer</span><span class="pun">.</span><span class="pln">solution_count</span><span class="pun">())</span><span class="pln"><br><br><br></span><span class="kwd">if</span><span class="pln"> __name__ </span><span class="pun">==</span><span class="pln"> </span><span class="str">'__main__'</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; main</span><span class="pun">()</span></pre>
+ 
+  </div>
+  
+
+  
+        
+  
+
+
+
+
+
+
+
+        
+<div class="devsite-content-footer nocontent">
+  
+  
+    <p>Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see our <a href="https://developers.google.cn/terms/site-policies">Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+  
+
+  
+    
+    <p class="devsite-content-footer-date" itemprop="datePublished" content="2018-12-28T20:22:54.943227">
+      
+      上次更新日期：十二月 28, 2018
+    </p>
+  
+
+</div>
+
+        </article>
+      </article>
+  
+
+        </div>
+      
+
+<footer class="devsite-footer-promos nocontent"><nav class="devsite-full-site-width"><ul class="devsite-footer-promos-list"><li class="devsite-footer-promo"><a href="http://github.com/google/or-tools" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo"><img class="devsite-footer-promo-icon" src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/logo-github.svg">
+          
+          
+            GitHub
+          
+        </a><div class="devsite-footer-promo-description">Download our code</div></li><li class="devsite-footer-promo"><a href="https://groups.google.com/forum/#!forum/or-tools-discuss" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。"><img class="devsite-footer-promo-icon" src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/groups_24dp.png">
+          
+          
+            Discussion forum
+          
+        </a><div class="devsite-footer-promo-description">Visit our forum</div></li><li class="devsite-footer-promo"><a href="http://or-tools.blogspot.com/" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。"><img class="devsite-footer-promo-icon" src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/blogger_24dp.png">
+          
+          
+            Blog
+          
+        </a><div class="devsite-footer-promo-description">Read our blog</div></li></ul></nav></footer><footer class="devsite-footer-linkboxes nocontent
+               devsite-footer-linkboxes-all-backup
+               devsite-footer-linkboxes-with-sites"><nav class="devsite-full-site-width"><ul class="devsite-footer-linkboxes-list"><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">社交沟通</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="http://developers.googleblog.cn/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Blog Link">
+                博客
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://www.facebook.com/Google-Developers-967415219957038/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Facebook Link">
+                Facebook
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://plus.google.com/+GoogleDevelopers" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer G+ Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google+
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://medium.com/google-developers" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Medium Link">
+                Medium
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://twitter.com/googledevs" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Twitter Link">
+                Twitter
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://www.youtube.com/channel/UCQqa5UIHtrnpiADC3eHFupw" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer YouTube Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                YouTube
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">计划</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://www.womentechmakers.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Women Techmakers">
+                Women Techmakers
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/agency/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Agency">
+                Agency Program
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/groups/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Groups">
+                GDG
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/experts/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Experts">
+                Google Developers Experts
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/startups/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Startups">
+                Startup Launchpad
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://userresearch.google.com/?reserved=0&amp;utm_source=developers.google.com&amp;Q_Language=en&amp;utm_medium=own_srch&amp;utm_campaign=Global-developers&amp;utm_term=0&amp;utm_content=0&amp;productTag=clou&amp;campaignDate=nov18&amp;pType=devel&amp;referral_code=js564523" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer User Studies" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                User Studies
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">开发者控制台</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://console.developers.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Developers Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google API Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.cloud.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Cloud Platform Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Cloud Platform Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://play.google.com/apps/publish/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Play Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Play Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.firebase.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Firebase Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Firebase Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.actions.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Actions on Google Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Actions on Google Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://cast.google.com/publish/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Cast SDK Developer Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Cast SDK Developer Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://chrome.google.com/webstore/developer/dashboard" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Chrome Web Store Developer Dashboard" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Chrome Web Store Dashboard
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-sites"><a href="https://developers.google.cn/" class="gc-analytics-event devsite-footer-linkbox-logo-link" data-category="Site-Wide Custom Events" data-label="Footer Google Developers Link"><img class="devsite-footer-linkbox-logo" src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/lockup-color-knockout.png" alt="Google Developers"></a><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://developer.android.google.cn/index.html" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Link">
+                Android
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developer.chrome.com/home" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Chrome Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Chrome
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://firebase.google.cn/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Firebase Link">
+                Firebase
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://cloud.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Cloud Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Cloud Platform
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/products/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Products Link">
+                所有产品
+            </a></li></ul></li></ul></nav></footer><footer class="devsite-utility-footer"><nav class="devsite-utility-footer-nav devsite-nav devsite-full-site-width"><div class="devsite-utility-footer-nav-left"><form class="devsite-utility-footer-language" action="https://developers.google.cn/i18n/setlang/" method="post"><input type="hidden" name="xsrf_token" value="64_MSFj_BgWNwY3WO018MSQtE5jzPoVdWtywHZ2WsJA6MTU0NzAxNTY1ODQ2MDE1Mw"><input type="hidden" name="next" value="/optimization/scheduling/employee_scheduling"><select class="devsite-utility-footer-language-select kd-select" name="language" track-type="languageSelector" track-name="click" style="display: none;"><option value="id" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="id" track-metadata-original-language="zh-cn" track-metadata-selected-language="id">
+            Bahasa Indonesia
+          </option><option value="de" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="de" track-metadata-original-language="zh-cn" track-metadata-selected-language="de">
+            Deutsch
+          </option><option value="en" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="en" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </option><option value="es" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="es" track-metadata-original-language="zh-cn" track-metadata-selected-language="es">
+            español
+          </option><option value="fr" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="fr" track-metadata-original-language="zh-cn" track-metadata-selected-language="fr">
+            français
+          </option><option value="pt-br" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="pt-br" track-metadata-original-language="zh-cn" track-metadata-selected-language="pt-br">
+            Português Brasileiro
+          </option><option value="ru" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ru" track-metadata-original-language="zh-cn" track-metadata-selected-language="ru">
+            Русский
+          </option><option value="ja" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ja" track-metadata-original-language="zh-cn" track-metadata-selected-language="ja">
+            日本語
+          </option><option value="zh-cn" selected="selected" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="zh-cn" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </option><option value="ko" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ko" track-metadata-original-language="zh-cn" track-metadata-selected-language="ko">
+            한국어
+          </option></select><span class="kd-button kd-menubutton kd-select" track-type="languageSelector" track-name="click"><div class="label">
+            简体中文
+          </div><div class="kd-disclosureindicator"></div></span></form><span class="devsite-utility-footer-links"><a class="devsite-utility-footer-link gc-analytics-event" href="https://developers.google.cn/terms/site-terms" data-category="Site-Wide Custom Events" data-label="Footer terms link" data-footer-link-id="terms">条款
+         </a><a class="devsite-utility-footer-link gc-analytics-event" href="https://policies.google.cn/privacy" data-category="Site-Wide Custom Events" data-label="Footer privacy link" data-footer-link-id="privacy" data-cookie-policy="//policies.google.cn/technologies/cookies">隐私权
+         </a></span></div></nav></footer><div class="devsite-feedback-dialog devsite-dialog"><div class="devsite-dialog-contents"><h3>发送以下问题的反馈：</h3><div class="devsite-feedback-item"><a data-type="documentation" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Docs Feedback Image" track-type="feedback" track-name="feedbackDocIcon" track-metadata-position="header"><div class="devsite-feedback-item-icon-container"><div class="devsite-feedback-item-icon-white devsite-feedback-item-icon-docs
+                        material-icons"></div></div></a><div class="devsite-feedback-item-name">
+          
+          此网页
+        </div><div class="devsite-feedback-item-description"><a data-type="documentation" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Docs Feedback Text" track-type="feedback" track-name="feedbackDocText" track-metadata-position="header">
+            
+            文档反馈
+          </a></div></div><div class="devsite-feedback-item"><a data-type="product" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Product Feedback Image" track-type="feedback" track-name="feedbackProductIcon" track-metadata-position="header"><img src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/orLogo.png" class="devsite-feedback-item-icon" alt="OR-Tools"></a><div class="devsite-feedback-item-name">
+        OR-Tools
+        </div><div class="devsite-feedback-item-description"><a data-type="product" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Product Feedback Text" track-type="feedback" track-name="feedbackProductText" track-metadata-position="header">
+            
+            产品反馈
+          </a></div></div></div><div class="devsite-dialog-buttons"><button type="button" class="devsite-feedback-cancel button-white gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Cancel Feedback Button" track-type="feedback" track-name="cancelFeedbackButton" track-metadata-position="header">
+        
+        取消
+      </button></div></div><script>
+  $(document).ready(function() {
+    new devsite.feedback.Widget({
+        'product_id': '106275',
+        'bucket': '',
+        'context': 'DevSite feedback link',
+        'version': 'devsite-20190107-r00-rc01.default'
+      },
+      document.querySelectorAll('.devsite-feedback-button'),
+      'zh-cn',
+      document.querySelector('.devsite-site-mask'),
+      document.querySelector('.devsite-feedback-dialog'),
+      document.querySelector('.devsite-feedback-cancel'),
+      document.querySelectorAll('.devsite-feedback-item a:not([href])')
+    );
+  });
+  </script></div><script async="" defer="" src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/api.js"></script><script src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/saved_resource"></script><script src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/script_foot_closure__zh_cn.js"></script><script src="./Employee Scheduling  _  OR-Tools  _  Google Developers_files/script_foot.js"></script><script>
+        (function($) {
+          
+          devsite.devsite.Init($, {'ENABLE_BLOCKED_VIDEO_PLACEHOLDER': 1, 'SITE_NAME': 'devsite_china', 'FULL_SITE_SEARCH_ENABLED': 0, 'ENABLE_CLOUDTRACK': 0, 'VTAGS_ENABLED': 0, 'HISTORY_ENABLED': 0, 'SIDEBAR_MINI_ENABLED': 0, 'VERSION_HASH': '0ee1984e83', 'SCRIPTSAFE_DOMAIN': 'google-developers.gonglchuangl.net', 'ENABLE_BLOCKED_LINK_TOOLTIP': 1, 'ALLOWED_HOSTS': ['.android.com', '.appspot.com', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.tensorflow.org'], 'BLOCK_RSS_FEEDS': 1},
+                               '[]','zh-cn',
+                               true, '',
+                               {"8e03e230de0bd8a6fe173fdf172e8b3f": true, "8de7a048f21618359bd37f5ce44be073": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "d169d485cf24243a263783dbe42029b1": true, "039e5d84b87fd75807ffb37b7f1bbf2c": true, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true, "098dafe57affddc137df300142652cfd": false}, '/optimization/',
+                               'https://developers.google.cn/');
+        })(jQuery);
+
+        
+        devsite.localInit = function() {
+          
+        };
+
+      </script><script>
+      $('.devsite-utility-footer-language-select').each(function() {
+        $(this).change(function(){$('.devsite-utility-footer-language').submit();});
+      });
+      </script></div><span id="devsite-request-elapsed" data-request-elapsed="208.129882812"></span>
+<ul class="kd-menulist devsite-hidden" style="left: 23.9946px; right: auto; top: 7987.5px;"><li class="kd-menulistitem" value="id" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="id" track-metadata-original-language="zh-cn" track-metadata-selected-language="id">
+            Bahasa Indonesia
+          </li><li class="kd-menulistitem" value="de" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="de" track-metadata-original-language="zh-cn" track-metadata-selected-language="de">
+            Deutsch
+          </li><li class="kd-menulistitem" value="en" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="en" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </li><li class="kd-menulistitem" value="es" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="es" track-metadata-original-language="zh-cn" track-metadata-selected-language="es">
+            español
+          </li><li class="kd-menulistitem" value="fr" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="fr" track-metadata-original-language="zh-cn" track-metadata-selected-language="fr">
+            français
+          </li><li class="kd-menulistitem" value="pt-br" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="pt-br" track-metadata-original-language="zh-cn" track-metadata-selected-language="pt-br">
+            Português Brasileiro
+          </li><li class="kd-menulistitem" value="ru" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ru" track-metadata-original-language="zh-cn" track-metadata-selected-language="ru">
+            Русский
+          </li><li class="kd-menulistitem" value="ja" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ja" track-metadata-original-language="zh-cn" track-metadata-selected-language="ja">
+            日本語
+          </li><li class="kd-menulistitem devsite-selected-option" value="zh-cn" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="zh-cn" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </li><li class="kd-menulistitem" value="ko" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ko" track-metadata-original-language="zh-cn" track-metadata-selected-language="ko">
+            한국어
+          </li></ul></body></html>

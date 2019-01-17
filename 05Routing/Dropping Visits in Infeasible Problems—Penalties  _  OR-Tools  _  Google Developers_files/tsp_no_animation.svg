@@ -1,0 +1,33 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns="http://www.w3.org/2000/svg" version="1.1"
+     height="300" width="700">
+  <line x1="200" y1="50" x2="200" y2="120" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="50" x2="100" y2="270" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="50" x2="300" y2="240" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="120" x2="100" y2="270" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="120" x2="300" y2="240" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="100" y1="270" x2="300" y2="240" style="stroke:rgb(150,150,150);stroke-width:1" />
+
+  <circle cx="200" cy="50" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="200" cy="130" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="100" cy="270" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="300" cy="240" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+
+  <text x="190" y="25" style="fill:red;">20</text>
+  <text x="55" y="275" style="fill:red;">20</text>
+  <text x="326" y="248" style="fill:red;">20</text>
+
+  <text x="190" y="100" style="fill:black;">10</text>
+  <text x="164" y="188" style="fill:black;">30</text>
+  <text x="225" y="188" style="fill:black;">15</text>
+  <text x="190" y="275" style="fill:black;">30</text>
+  <text x="262" y="155" style="fill:black;">30</text>
+  <text x="128" y="155" style="fill:black;">35</text>
+
+  <text x="193" y="55" style="fill:black;">A</text>
+  <text x="185" y="135" style="fill:black;">Dep</text>
+  <text x="95" y="275" style="fill:black;">B</text>
+  <text x="295" y="245" style="fill:black;">C</text>
+
+  <path id="P1" d="M 200 50 L 200 120 L 100 270 L 300 240 L 200 120 L 200 50" fill="none" stroke-width="0"/>
+</svg>

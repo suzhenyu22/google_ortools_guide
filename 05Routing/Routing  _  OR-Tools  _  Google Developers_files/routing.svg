@@ -1,0 +1,36 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns="http://www.w3.org/2000/svg" version="1.1"
+     height="300" width="700">
+  <line x1="200" y1="50" x2="200" y2="120" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="50" x2="400" y2="75" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="50" x2="375" y2="150" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="50" x2="100" y2="270" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="50" x2="300" y2="240" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="120" x2="100" y2="270" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="120" x2="300" y2="240" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="120" x2="375" y2="150" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="200" y1="120" x2="400" y2="75" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="100" y1="270" x2="300" y2="240" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="100" y1="270" x2="375" y2="150" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="400" y1="75" x2="375" y2="150" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="400" y1="75" x2="475" y2="230" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="375" y1="150" x2="475" y2="230" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="375" y1="150" x2="300" y2="240" style="stroke:rgb(150,150,150);stroke-width:1" />
+  <line x1="300" y1="240" x2="475" y2="230" style="stroke:rgb(150,150,150);stroke-width:1" />
+
+  <circle cx="200" cy="50" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="200" cy="120" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="100" cy="270" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="300" cy="240" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="400" cy="75" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="375" cy="150" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+  <circle cx="475" cy="230" r="20" style="stroke:rgb(75,75,75);stroke-width:3;fill:rgb(200,200,200)" />
+
+  <text x="195" y="52" style="fill:black;">A</text>
+  <text x="195" y="122" style="fill:black;">B</text>
+  <text x="95" y="272" style="fill:black;">C</text>
+  <text x="295" y="242" style="fill:black;">D</text>
+  <text x="395" y="77" style="fill:black;">E</text>
+  <text x="370" y="152" style="fill:black;">F</text>
+  <text x="470" y="232" style="fill:black;">G</text>
+</svg>

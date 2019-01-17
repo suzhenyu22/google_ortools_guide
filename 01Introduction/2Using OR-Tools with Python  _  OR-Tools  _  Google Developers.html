@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://developers.google.cn/optimization/introduction/python -->
+<html lang="en" class="" ml-update="aware"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/linkid.js"></script><script async="" src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/analytics.js"></script><script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script><meta name="xsrf_token" content="tc1dFhE7hY29fw3_4Oprq3sA3rAhmajAuL3htD879EM6MTU0NzAxNzM1NDk0Mjg3Ng"><link rel="canonical" href="https://developers.google.com/optimization/introduction/python"><link rel="alternate" href="https://developers.google.com/optimization/introduction/python" hreflang="en"><link rel="alternate" href="https://developers.google.cn/optimization/introduction/python" hreflang="en-cn"><link rel="alternate" href="https://developers.google.com/optimization/introduction/python" hreflang="x-default"><link rel="shortcut icon" href="https://developers.google.cn/_static/0ee1984e83/images/favicon.png"><link rel="apple-touch-icon" href="https://developers.google.cn/_static/0ee1984e83/images/touch-icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/css"><link rel="stylesheet" href="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/devsite-google-blue.css"><script src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/jquery-bundle.js"></script><meta property="og:site_name" content="Google Developers"><meta property="og:type" content="website"><meta property="og:url" content="https://developers.google.com/optimization/introduction/python"><meta property="og:locale" content="en"><script>
+    var ___gcfg = ___gcfg || {};
+    ___gcfg.lang = 'zh-cn';
+  </script><title>Using OR-Tools with Python &nbsp;|&nbsp; OR-Tools
+      &nbsp;|&nbsp; Google Developers</title><meta property="og:title" content="Using OR-Tools with Python  |  OR-Tools
+       |  Google Developers"></head><body class="devsite-doc-page devsite-header-no-upper-tabs no-touch" data-family="endorsed" id="top_of_page"><div class="devsite-wrapper" style="margin-top: 0px;"><div class="devsite-top-section-wrapper
+            "><header class="devsite-top-section nocontent devsite-top-section-pinned"><div class="devsite-top-logo-row-wrapper-wrapper" style="position: relative;"><div class="devsite-top-logo-row-wrapper"><div class="devsite-top-logo-row devsite-full-site-width"><button type="button" class="devsite-expand-section-nav devsite-header-icon-button
+                                       button-flat material-icons gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Hamburger menu"></button><div class="devsite-product-name-wrapper"><a class="devsite-product-name-link gc-analytics-event" href="https://developers.google.cn/optimization/" data-category="Site-Wide Custom Events" data-label="Project logo (header)"><img src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/orLogo.png" class="devsite-product-logo" alt="Google OR-Tools"></a><span class="devsite-product-name"><ul class="devsite-breadcrumb-list"><li class="devsite-breadcrumb-item"><a href="https://developers.google.cn/optimization/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Upper Header" data-value="1">
+    
+    
+      
+        Google OR-Tools
+      
+    
+    
+    </a></li></ul></span></div><div class="devsite-header-upper-tabs"></div><form class="devsite-search-form" action="https://developers.google.cn/s/results/" method="GET" id="top-search" search-placeholder="搜索"><div id="searchbox" class="devsite-searchbox"><input placeholder="搜索" type="text" class="devsite-search-field devsite-search-query" name="q" value="" autocomplete="off" aria-label="搜索框"><div class="devsite-search-image material-icons"></div></div><input type="hidden" name="p" id="search_project" value="/optimization/" data-project-name="OR-Tools" data-project-path="/optimization/" data-query-match=""><input type="hidden" class="suggest-project" value="OR-Tools"><div class="suggest-project-metadata" data-home_url="/optimization/" data-path="/optimization/" data-name="OR-Tools"></div><div class="devsite-popout devsite-popout-closed"><div class="devsite-suggest-results" style="display: none;"></div></div></form><a class="devsite-header-link devsite-top-button button gc-analytics-event" href="https://developers.google.cn/products/" data-category="Site-Wide Custom Events" data-label="Site header link" track-type="globalNav" track-name="所有产品" track-metadata-position="nav" track-metadata-eventdetail="nav"><div class="devsite-header-link-icon material-icons">
+                  list
+                </div><div class="devsite-header-link-label">所有产品</div></a><button type="button" class="devsite-search-button devsite-header-icon-button button-flat
+                                       material-icons"></button></div></div></div><div class="devsite-collapsible-section" style="margin-top: 0px;"><div class="devsite-header-background devsite-full-site-width"><div class="devsite-doc-set-nav-row devsite-full-site-width"><nav class="devsite-doc-set-nav devsite-nav devsite-overflow-tabs-scroll-wrapper"><ul class="devsite-doc-set-nav-tab-list devsite-overflow-tabs-scroll" style="min-width: 550px; left: 0px;"><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: 首页">
+          首页
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/install" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Installation">
+          Installation
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-doc-set-nav-active devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" aria-label="Guides, selected" data-category="Site-Wide Custom Events" data-label="Tab: Guides">
+          Guides
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/reference" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Reference">
+          Reference
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/support/overview" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Support">
+          Support
+        </a></li></ul><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-forward devsite-hidden" aria-label="滚动标签"></button><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-back devsite-hidden" aria-label="滚动标签"></button></nav></div></div></div></header><script>
+    if (window.jQuery) {
+      $(document).ready(function() {
+        if (window.devsite && window.devsite.search) {
+          
+          window.devsite.search.init('zh-cn')
+        }
+      });
+    }
+  </script></div><div id="gc-wrapper" itemscope="" itemtype="http://schema.org/Article"><input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {}, &quot;gaid&quot;: &quot;UA-10115507-7&quot;}"><input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;OR-Tools&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-24532603-11&quot;}"><script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "CN", "language": {"requested": "zh-cn", "served": "en"}, "projectName": "OR-Tools", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+
+      
+        <div class="devsite-site-mask"></div>
+        
+  
+
+
+<nav class="devsite-nav-responsive devsite-nav nocontent" tabindex="0" style="left: -256px;">
+  
+  <div class="devsite-nav-responsive-tabs-panel devsite-nav-responsive-transition devsite-nav-responsive-transform" style="display: none;">
+    
+      
+
+
+
+<nav class="devsite-nav-responsive-tabs devsite-nav">
+  <ul class="devsite-nav-list">
+  
+
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: 首页"><span>
+          首页
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/install?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Installation"><span>
+          Installation
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <span class="devsite-nav-responsive-forward devsite-nav-responsive-tab devsite-nav-title
+                     devsite-nav-active gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: Guides" tabindex="0"><span>
+          Guides
+        </span></span>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/reference" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Reference"><span>
+          Reference
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/support/overview?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Support"><span>
+          Support
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      <a href="https://developers.google.cn/products/" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: all_products"><span>
+        所有产品
+      </span></a>
+    </li>
+  
+  </ul>
+</nav>
+
+
+    
+  </div>
+  
+  
+  <div class="devsite-nav-responsive-sidebar-panel" style="display: block;">
+    
+    <div class="devsite-nav-responsive-back" tabindex="0"></div>
+    
+    <nav class="devsite-nav-responsive-sidebar">
+      
+      
+    <ul class="devsite-nav-list devsite-nav-expandable devsite-nav-only-accordions"><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Introduction, click to expand/collapse" role="link" tabindex="0"><span>Introduction</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-nav-title"><span>About Combinatorial Optimization</span></a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Get Started with OR-Tools, click to expand/collapse" role="link" tabindex="0"><span>Get Started with OR-Tools</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="1"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/get_started" class="devsite-nav-title"><span>概览</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cpp" class="devsite-nav-title"><span>C++</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://developers.google.cn/optimization/introduction/python" class="devsite-nav-title"><span>Python</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/java" class="devsite-nav-title"><span>Java</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cs" class="devsite-nav-title"><span>C#</span></a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Linear Optimization, click to expand/collapse" role="link" tabindex="0"><span>Linear Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/glop" class="devsite-nav-title"><span>The Glop Linear Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/add-on" class="devsite-nav-title"><span>Add-on for Google Sheets</span></a></li><li class="devsite-nav-item devsite-nav-external devsite-nav-has-status"><a href="https://developers.google.cn/apps-script/reference/optimization" class="devsite-nav-title"><span class="devsite-nav-text"><span>Service for Apps Script</span></span><span class="devsite-nav-icon-wrapper"><span class="devsite-nav-icon material-icons" data-tooltip-align="b,c" data-tooltip="外部" aria-label="外部" data-title="外部"></span></span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Constraint Optimization, click to expand/collapse" role="link" tabindex="0"><span>Constraint Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_solver" class="devsite-nav-title"><span>CP-SAT Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/original_cp_solver" class="devsite-nav-title"><span>Original CP Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cryptarithmetic" class="devsite-nav-title"><span>Cryptarithmetic</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/queens" class="devsite-nav-title"><span>The N-queens Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_tasks" class="devsite-nav-title"><span>Setting Solver Limits</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Integer Optimization, click to expand/collapse" role="link" tabindex="0"><span>Integer Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt" class="devsite-nav-title"><span>Mixed-Integer Programming</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp" class="devsite-nav-title"><span>CP Approach to Integer Optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/sudoku" class="devsite-nav-title"><span>Sudoku Add-on for Google Sheets</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Routing, click to expand/collapse" role="link" tabindex="0"><span>Routing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/tsp" class="devsite-nav-title"><span>Traveling Salesman Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/vrp" class="devsite-nav-title"><span>Vehicle Routing Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrp" class="devsite-nav-title"><span>Capacity Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw" class="devsite-nav-title"><span>Time Window Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw_resources" class="devsite-nav-title"><span>Resource Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/penalties" class="devsite-nav-title"><span>Dropping Visits in Infeasible Problems-Penalties</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_tasks" class="devsite-nav-title"><span>Common Vehicle Routing Tasks</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_options" class="devsite-nav-title"><span>Routing Options</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/google_direction" class="devsite-nav-title"><span>Google Direction API</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Bin Packing, click to expand/collapse" role="link" tabindex="0"><span>Bin Packing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin/knapsack" class="devsite-nav-title"><span>Knapsacks</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Network Flows, click to expand/collapse" role="link" tabindex="0"><span>Network Flows</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/maxflow" class="devsite-nav-title"><span>Maximum Flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/mincostflow" class="devsite-nav-title"><span>Minimum Cost Flows</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Assignment, click to expand/collapse" role="link" tabindex="0"><span>Assignment</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/simple_assignment" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_min_cost_flow" class="devsite-nav-title"><span>Assignment as a Min Cost Flow Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_mip" class="devsite-nav-title"><span>Assignment as a MIP Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_cp" class="devsite-nav-title"><span>Assignment with Task Sizes</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_groups" class="devsite-nav-title"><span>Assignment with Allowed Groups</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Scheduling, click to expand/collapse" role="link" tabindex="0"><span>Scheduling</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling" class="devsite-nav-title"><span>Employee Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/job_shop" class="devsite-nav-title"><span>The Job Shop Problem</span></a></li></ul></li></ul></nav>
+  </div>
+  
+  
+</nav>
+
+
+        <div class="devsite-main-content clearfix" style="margin-top: 136px;">
+
+        
+        
+
+        
+  
+  
+    
+    
+      
+  <nav class="devsite-section-nav devsite-nav nocontent" style="left: auto; max-height: 628px; position: relative; top: 0px;">
+    <ul class="devsite-nav-list devsite-nav-expandable devsite-nav-only-accordions"><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Introduction, click to expand/collapse" role="link" tabindex="0"><span>Introduction</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-nav-title"><span>About Combinatorial Optimization</span></a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Get Started with OR-Tools, click to expand/collapse" role="link" tabindex="0"><span>Get Started with OR-Tools</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="1"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/get_started" class="devsite-nav-title"><span>概览</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cpp" class="devsite-nav-title"><span>C++</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://developers.google.cn/optimization/introduction/python" class="devsite-nav-title"><span>Python</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/java" class="devsite-nav-title"><span>Java</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cs" class="devsite-nav-title"><span>C#</span></a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Linear Optimization, click to expand/collapse" role="link" tabindex="0"><span>Linear Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/glop" class="devsite-nav-title"><span>The Glop Linear Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/add-on" class="devsite-nav-title"><span>Add-on for Google Sheets</span></a></li><li class="devsite-nav-item devsite-nav-external devsite-nav-has-status"><a href="https://developers.google.cn/apps-script/reference/optimization" class="devsite-nav-title"><span class="devsite-nav-text"><span>Service for Apps Script</span></span><span class="devsite-nav-icon-wrapper"><span class="devsite-nav-icon material-icons" data-tooltip-align="b,c" data-tooltip="外部" aria-label="外部" data-title="外部"></span></span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Constraint Optimization, click to expand/collapse" role="link" tabindex="0"><span>Constraint Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_solver" class="devsite-nav-title"><span>CP-SAT Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/original_cp_solver" class="devsite-nav-title"><span>Original CP Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cryptarithmetic" class="devsite-nav-title"><span>Cryptarithmetic</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/queens" class="devsite-nav-title"><span>The N-queens Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_tasks" class="devsite-nav-title"><span>Setting Solver Limits</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Integer Optimization, click to expand/collapse" role="link" tabindex="0"><span>Integer Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt" class="devsite-nav-title"><span>Mixed-Integer Programming</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp" class="devsite-nav-title"><span>CP Approach to Integer Optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/sudoku" class="devsite-nav-title"><span>Sudoku Add-on for Google Sheets</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Routing, click to expand/collapse" role="link" tabindex="0"><span>Routing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/tsp" class="devsite-nav-title"><span>Traveling Salesman Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/vrp" class="devsite-nav-title"><span>Vehicle Routing Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrp" class="devsite-nav-title"><span>Capacity Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw" class="devsite-nav-title"><span>Time Window Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw_resources" class="devsite-nav-title"><span>Resource Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/penalties" class="devsite-nav-title"><span>Dropping Visits in Infeasible Problems-Penalties</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_tasks" class="devsite-nav-title"><span>Common Vehicle Routing Tasks</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_options" class="devsite-nav-title"><span>Routing Options</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/google_direction" class="devsite-nav-title"><span>Google Direction API</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Bin Packing, click to expand/collapse" role="link" tabindex="0"><span>Bin Packing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin/knapsack" class="devsite-nav-title"><span>Knapsacks</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Network Flows, click to expand/collapse" role="link" tabindex="0"><span>Network Flows</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/maxflow" class="devsite-nav-title"><span>Maximum Flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/mincostflow" class="devsite-nav-title"><span>Minimum Cost Flows</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Assignment, click to expand/collapse" role="link" tabindex="0"><span>Assignment</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/simple_assignment" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_min_cost_flow" class="devsite-nav-title"><span>Assignment as a Min Cost Flow Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_mip" class="devsite-nav-title"><span>Assignment as a MIP Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_cp" class="devsite-nav-title"><span>Assignment with Task Sizes</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_groups" class="devsite-nav-title"><span>Assignment with Allowed Groups</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Scheduling, click to expand/collapse" role="link" tabindex="0"><span>Scheduling</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling" class="devsite-nav-title"><span>Employee Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/job_shop" class="devsite-nav-title"><span>The Job Shop Problem</span></a></li></ul></li></ul>
+  </nav>
+
+    
+
+    
+  <nav class="devsite-page-nav devsite-nav" style="position: relative; left: auto; max-height: 628px; top: 0px;"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://developers.google.cn/optimization/introduction/python#top_of_page" class="devsite-nav-title"><span>目录</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#optimization" class="devsite-nav-title"><span>What is an optimization problem?</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#simple_example" class="devsite-nav-title"><span>Running a Python program</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#setting_up_python" class="devsite-nav-title"><span>Solving an optimization problem in Python</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#lp" class="devsite-nav-title"><span>A linear optimization example</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#steps" class="devsite-nav-title"><span>Main steps in solving the problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#python_example" class="devsite-nav-title"><span>Python program</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#entire_program" class="devsite-nav-title"><span>The complete program</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#output" class="devsite-nav-title"><span>Optimal solution</span></a></li></ul></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#more-python-examples" class="devsite-nav-title"><span>More Python examples</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#solver" class="devsite-nav-title"><span>Identifying the type of problem you wish to solve</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#linear" class="devsite-nav-title"><span>Linear optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#cp" class="devsite-nav-title"><span>Constraint optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#mip" class="devsite-nav-title"><span>Mixed-integer optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#bin_packing" class="devsite-nav-title"><span>Bin packing</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#graph" class="devsite-nav-title"><span>Network flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#assignment" class="devsite-nav-title"><span>Assignment</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#scheduling" class="devsite-nav-title"><span>Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#routing" class="devsite-nav-title"><span>Routing</span></a></li></ul></li></ul></nav>
+
+
+      <article class="devsite-article">
+        <article class="devsite-article-inner">
+  
+          
+  
+
+
+<div class="devsite-rating-container
+            "><div class="devsite-rating-stars"><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="1" data-category="Site-Wide Custom Events" data-label="Star Rating 1" track-metadata-score="1" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：1 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="2" data-category="Site-Wide Custom Events" data-label="Star Rating 2" track-metadata-score="2" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：2 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="3" data-category="Site-Wide Custom Events" data-label="Star Rating 3" track-metadata-score="3" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：3 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="4" data-category="Site-Wide Custom Events" data-label="Star Rating 4" track-metadata-score="4" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：4 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="5" data-category="Site-Wide Custom Events" data-label="Star Rating 5" track-metadata-score="5" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：5 星（最高 5 星）"></div></div><div class="devsite-rating-description"></div><div class="devsite-rating-internal"><span class="devsite-rating-stats"></span></div></div><script>
+  $(document).ready(function() {
+    devsite.ratings.init(
+      document.querySelectorAll('#devsite-feedback-project'), false
+      
+    );
+  });
+</script>
+
+
+  
+  <nav class="devsite-breadcrumb-nav devsite-nav">
+    
+
+
+<ul class="devsite-breadcrumb-list">
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <a href="https://developers.google.cn/products/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1">
+    
+    
+      产品
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://developers.google.cn/optimization/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2">
+    
+    
+      OR-Tools
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="3">
+    
+    
+      Guides
+    
+    
+    </a>
+    
+  </li>
+  
+</ul>
+
+  </nav>
+  
+  
+  <h1 itemprop="name" class="devsite-page-title">
+    Using OR-Tools with Python
+  </h1>
+  
+  
+  <nav class="devsite-page-nav-embedded devsite-nav"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://developers.google.cn/optimization/introduction/python#top_of_page" class="devsite-nav-title"><span>目录</span></a><button type="button" class="devsite-nav-show-all button-transparent material-icons" data-tooltip-align="b,c" data-tooltip="展开/收起内容" aria-label="展开/收起内容" data-title="展开/收起内容"></button></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#optimization" class="devsite-nav-title"><span>What is an optimization problem?</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#simple_example" class="devsite-nav-title"><span>Running a Python program</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#setting_up_python" class="devsite-nav-title"><span>Solving an optimization problem in Python</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#lp" class="devsite-nav-title"><span>A linear optimization example</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#steps" class="devsite-nav-title devsite-nav-item-hidden"><span>Main steps in solving the problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#python_example" class="devsite-nav-title devsite-nav-item-hidden"><span>Python program</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#entire_program" class="devsite-nav-title devsite-nav-item-hidden"><span>The complete program</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#output" class="devsite-nav-title devsite-nav-item-hidden"><span>Optimal solution</span></a></li></ul></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#more-python-examples" class="devsite-nav-title devsite-nav-item-hidden"><span>More Python examples</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#solver" class="devsite-nav-title devsite-nav-item-hidden"><span>Identifying the type of problem you wish to solve</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#linear" class="devsite-nav-title devsite-nav-item-hidden"><span>Linear optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#cp" class="devsite-nav-title devsite-nav-item-hidden"><span>Constraint optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#mip" class="devsite-nav-title devsite-nav-item-hidden"><span>Mixed-integer optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#bin_packing" class="devsite-nav-title devsite-nav-item-hidden"><span>Bin packing</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#graph" class="devsite-nav-title devsite-nav-item-hidden"><span>Network flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#assignment" class="devsite-nav-title devsite-nav-item-hidden"><span>Assignment</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#scheduling" class="devsite-nav-title devsite-nav-item-hidden"><span>Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python#routing" class="devsite-nav-title devsite-nav-item-hidden"><span>Routing</span></a></li></ul></li><li class="devsite-nav-item"><button type="button" class="button-flat devsite-nav-more-items material-icons" aria-hidden="true" data-tooltip-align="b,c" data-tooltip="展开/收起内容" aria-label="展开/收起内容" data-title="展开/收起内容"></button></li></ul></nav>
+  
+  <div class="devsite-article-body clearfix
+            " itemprop="articleBody">
+    
+    <p>The following sections introduce you to using OR-Tools with Python:</p>
+    <ul>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#optimization">What is an optimization problem?</a>
+      </li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#simple_example">Running a Python program</a>
+      </li>
+
+      <li><a href="https://developers.google.cn/optimization/introduction/python#setting_up_python">
+        Solving an optimization problem in Python</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#examples">More Python examples</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#solver">
+        Identifying the type of problem you wish to solve</a>
+      </li>
+    </ul>
+
+    <h2 id="optimization"><a href="https://developers.google.cn/optimization/introduction/python#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>What is an optimization problem?</h2>
+    <p>The goal of optimization is to find the <em>best</em> solution to a problem out of a
+large set of possible solutions. (Sometimes you'll be satisfied with finding any feasible solution;
+OR-Tools can do that as well.)</p>
+
+<p>Here's a typical optimization problem. Suppose that a shipping company
+      delivers packages to its customers using a fleet of trucks. Every day, the company
+      must assign packages to trucks, and then a choose a route for each truck to
+      deliver its packages. Each possible assignment of packages and
+      routes has a cost, based on the total travel distance for the trucks,
+      and possibly other factors as well. The problem is to choose the
+      assignments of packages and routes that has the least cost.</p>
+
+    <p>Like all optimization problems, this problem has the following elements:</p>
+    <ul>
+      <li>The <b><em>objective</em></b>—the quantity you want to optimize.
+        In the example above, the objective is to
+        minimize cost.
+        To set up an optimization problem, you need to define
+        a function that calculates the value of the objective for any
+        possible solution. This is called the <em>objective function</em>.
+        In the preceding example, the objective function would calculate the total cost
+        of any assignment of packages and routes.<br><br>
+        An <em>optimal</em> solution is one for which the value of the objective function is the
+        best.
+        ("Best" can be either a maximum or a minimum.)
+        </li>
+      <li>The <b><em>constraints</em></b>—restrictions on the set of possible solutions,
+        based on the specific requirements of the problem.
+        For example, if the shipping company can't
+        assign packages above a given weight to trucks,
+        this would impose a constraint on the solutions.
+        A <em>feasible</em> solution is one that satisfies all the given constraints for the
+        problem, without necessarily being optimal.</li>
+    </ul>
+    <p>The first step in solving an optimization problem is identifying the
+      objective and constraints.</p>
+
+
+    <h2 id="simple_example"><a href="https://developers.google.cn/optimization/introduction/python#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Running a Python program</h2>
+    <p>This section shows how to run a Python program that solves a very simple optimization
+    problem: find the maximum value of the objective function
+    <span style="font-style:italic">x</span> + <span style="font-style:italic">y</span>, subject to
+    the constraints 0&nbsp;≤&nbsp;<span style="font-style:italic">x</span>&nbsp;≤&nbsp;1 and
+    0&nbsp;≤&nbsp;<span style="font-style:italic">y</span>&nbsp;≤&nbsp;2.</p>
+    <p>The program is shown below. At this point, you don't need to understand the program
+    in detail—we're just seeing how to run the code.</p>
+    <!-- ToDo add git_revision="refs/tags/v6.10 upon github release -->
+    <pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="kwd">from</span><span class="pln"> __future__ </span><span class="kwd">import</span><span class="pln"> print_function<br></span><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">linear_solver </span><span class="kwd">import</span><span class="pln"> pywraplp<br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; solver </span><span class="pun">=</span><span class="pln"> pywraplp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">(</span><span class="str">'SolveSimpleSystem'</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;pywraplp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">.</span><span class="pln">GLOP_LINEAR_PROGRAMMING</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="com"># Create the variables x and y.</span><span class="pln"><br>&nbsp; x </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="str">'x'</span><span class="pun">)</span><span class="pln"><br>&nbsp; y </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="str">'y'</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="com"># Create the objective function, x + y.</span><span class="pln"><br>&nbsp; objective </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Objective</span><span class="pun">()</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetMaximization</span><span class="pun">()</span><span class="pln"><br>&nbsp; </span><span class="com"># Call the solver and display the results.</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">()</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Solution:'</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'x = '</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'y = '</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">())</span><span class="pln"><br><br></span><span class="kwd">if</span><span class="pln"> __name__ </span><span class="pun">==</span><span class="pln"> </span><span class="str">'__main__'</span><span class="pun">:</span><span class="pln"><br>&nbsp; main</span><span class="pun">()</span></pre>
+
+    <p>You can run the example as follows:</p>
+    <ol>
+      <li>Copy and paste the code above into new file and save it as <code>program.py</code>.</li>
+      <li>Open a command window and change to the directory where you saved
+      <code>program.py</code>.</li>
+      <li>At the command prompt, enter
+        <pre class="devsite-terminal devsite-click-to-copy"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><b>python <var>relative/path/to/</var>program.py</b></pre>
+         where <code><var>relative/path/to/</var></code> is the path to the directory where you
+         saved the program.</li>
+    </ol>
+    <p>The program returns the values of <span style="font-style:italic">x</span> and
+      <span style="font-style:italic">y</span> that maximize the objective function:</p>
+    <pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div>Solution:
+x =  1.0
+y =  2.0</pre>
+
+    <h2 id="setting_up_python"><a href="https://developers.google.cn/optimization/introduction/python#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Solving an optimization problem in Python</h2>
+    <p>Next, we give an example of an optimization problem, and show how to set up and solve it
+    in Python.
+    </p>
+
+    <h3 id="lp">A linear optimization example</h3>
+    <p>One of the oldest and most widely-used areas of optimization is
+      <a href="https://en.wikipedia.org/wiki/Linear_programming"><em>linear optimization</em></a>
+        (or <em>linear programming</em>),
+        in which the objective function and
+        the constraints can be written as linear expressions. Here's a simple
+      example of this type of problem.
+    </p><p>
+      </p><dl>
+        <dt>Maximize 3<span style="font-style:italic">x</span> + 4<span style="font-style:italic">y</span> subject to the following constraints:</dt>
+        <dd>
+          <div class="devsite-table-wrapper"><table border="0" style="width:150px">
+            <tbody><tr>
+              <td><span style="font-style:italic">x</span> + 2<span style="font-style:italic">y</span></td><td>≤</td><td>14</td>
+            </tr>
+            <tr>
+              <td>3<span style="font-style:italic">x</span> – <span style="font-style:italic">y</span></td><td>≥</td><td>0</td>
+            </tr>
+            <tr>
+              <td><span style="font-style:italic">x</span> – <span style="font-style:italic">y</span></td><td>≤</td><td>2</td>
+            </tr>
+          </tbody></table></div>
+        </dd>
+      </dl>
+    <p></p>
+    <p>The objective function in this example is f(<i>x</i>,&nbsp;<i>y</i>)&nbsp;=&nbsp;3<i>x</i>&nbsp;+&nbsp;4<i>y</i>.
+     Both the objective function
+     and the constraints are given by linear expressions, which
+     makes this a linear problem.</p>
+
+    <p>The constraints define the feasible region,
+    which is the triangle shown below, including its interior.</p>
+    <img src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/feasible_region.png">
+    <h3 id="steps">Main steps in solving the problem</h3>
+      <p>For each language, the basic steps for setting up and solving a problem are the same:</p>
+    <ul>
+      <li>Create the variables.</li>
+      <li>Define the constraints.</li>
+      <li>Define the objective function.</li>
+      <li>Declare the <em>solver</em>—the method that implements an algorithm for finding the
+        optimal solution.</li>
+      <li>Invoke the solver and display the results.</li>
+    </ul>
+
+
+    <h3 id="python_example">Python program</h3>
+    <p>Here are the steps for setting up and solving the problem in Python:
+    </p><ul>
+      <li>Create the variables.
+<pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; x </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVar</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="str">'x'</span><span class="pun">)</span><span class="pln"><br>&nbsp; y </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVar</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="str">'y'</span><span class="pun">)</span></pre>
+        <b>Note:</b> <code>NumVar</code> is the Python name for the C++ method
+        <a href="https://developers.google.cn/optimization/reference/linear_solver/linear_solver/MPSolver/index.html#MakeNumVar">
+            MakeNumVar</a>.</li>
+
+       <li>Define the constraints.
+<pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; </span><span class="com"># Constraint 1: x + 2y &lt;= 14.</span><span class="pln"><br>&nbsp; constraint1 </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Constraint</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="lit">14</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint1</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint1</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="com"># Constraint 2: 3x - y &gt;= 0.</span><span class="pln"><br>&nbsp; constraint2 </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Constraint</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">())</span><span class="pln"><br>&nbsp; constraint2</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint2</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="com"># Constraint 3: x - y &lt;= 2.</span><span class="pln"><br>&nbsp; constraint3 </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Constraint</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint3</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint3</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span></pre>
+         <b>Note:</b> <code>Constraint</code> is the Python name for the C++ method
+         <a href="https://developers.google.cn/optimization/reference/linear_solver/linear_solver/MPSolver/index.html#MakeRowConstraint">
+       MakeRowConstraint</a>
+      </li>
+
+       <li>Define the objective function.
+<pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; </span><span class="com"># Objective function: 3x + 4y.</span><span class="pln"><br>&nbsp; objective </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Objective</span><span class="pun">()</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">)</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">)</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetMaximization</span><span class="pun">()</span></pre></li>
+
+      <li>Declare the solver. <code>pywraplp</code> is a Python wrapper for the underlying
+        C++ solver. The argument <code>GLOP_LINEAR_PROGRAMMING</code> tells the solver to use Glop.
+<pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">linear_solver </span><span class="kwd">import</span><span class="pln"> pywraplp<br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; </span><span class="com"># Instantiate a Glop solver, naming it LinearExample.</span><span class="pln"><br>&nbsp; solver </span><span class="pun">=</span><span class="pln"> pywraplp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">(</span><span class="str">'LinearExample'</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;pywraplp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">.</span><span class="pln">GLOP_LINEAR_PROGRAMMING</span><span class="pun">)</span></pre></li>
+
+      <li>Invoke the solver and display the results.
+<pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; </span><span class="com"># Solve the system.</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">()</span><span class="pln"><br>&nbsp; opt_solution </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">()</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">4</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> y</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">()</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Number of variables ='</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVariables</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Number of constraints ='</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumConstraints</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="com"># The value of each variable in the solution.</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Solution:'</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'x = '</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'y = '</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="com"># The objective value of the solution.</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Optimal objective value ='</span><span class="pun">,</span><span class="pln"> opt_solution</span><span class="pun">)</span></pre></li>
+    </ul>
+     <h3 id="entire_program">The complete program</h3>
+    <p>The complete program is shown below.</p>
+<pre class="prettyprint lang-py"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="str">"""Linear optimization example"""</span><span class="pln"><br><br></span><span class="kwd">from</span><span class="pln"> __future__ </span><span class="kwd">import</span><span class="pln"> print_function<br></span><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">linear_solver </span><span class="kwd">import</span><span class="pln"> pywraplp<br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; </span><span class="com"># Instantiate a Glop solver, naming it LinearExample.</span><span class="pln"><br>&nbsp; solver </span><span class="pun">=</span><span class="pln"> pywraplp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">(</span><span class="str">'LinearExample'</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;pywraplp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">.</span><span class="pln">GLOP_LINEAR_PROGRAMMING</span><span class="pun">)</span><span class="pln"><br><br></span><span class="com"># Create the two variables and let them take on any value.</span><span class="pln"><br>&nbsp; x </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVar</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="str">'x'</span><span class="pun">)</span><span class="pln"><br>&nbsp; y </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVar</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="str">'y'</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="com"># Constraint 1: x + 2y &lt;= 14.</span><span class="pln"><br>&nbsp; constraint1 </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Constraint</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="lit">14</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint1</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint1</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="com"># Constraint 2: 3x - y &gt;= 0.</span><span class="pln"><br>&nbsp; constraint2 </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Constraint</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">())</span><span class="pln"><br>&nbsp; constraint2</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint2</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="com"># Constraint 3: x - y &lt;= 2.</span><span class="pln"><br>&nbsp; constraint3 </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Constraint</span><span class="pun">(-</span><span class="pln">solver</span><span class="pun">.</span><span class="pln">infinity</span><span class="pun">(),</span><span class="pln"> </span><span class="lit">2</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint3</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br>&nbsp; constraint3</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="pun">-</span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="com"># Objective function: 3x + 4y.</span><span class="pln"><br>&nbsp; objective </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Objective</span><span class="pun">()</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">)</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetCoefficient</span><span class="pun">(</span><span class="pln">y</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">)</span><span class="pln"><br>&nbsp; objective</span><span class="pun">.</span><span class="typ">SetMaximization</span><span class="pun">()</span><span class="pln"><br><br>&nbsp; </span><span class="com"># Solve the system.</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">()</span><span class="pln"><br>&nbsp; opt_solution </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">()</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">4</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> y</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">()</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Number of variables ='</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumVariables</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Number of constraints ='</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">NumConstraints</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="com"># The value of each variable in the solution.</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Solution:'</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'x = '</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'y = '</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">.</span><span class="pln">solution_value</span><span class="pun">())</span><span class="pln"><br>&nbsp; </span><span class="com"># The objective value of the solution.</span><span class="pln"><br>&nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Optimal objective value ='</span><span class="pun">,</span><span class="pln"> opt_solution</span><span class="pun">)</span><span class="pln"><br></span><span class="kwd">if</span><span class="pln"> __name__ </span><span class="pun">==</span><span class="pln"> </span><span class="str">'__main__'</span><span class="pun">:</span><span class="pln"><br>&nbsp; main</span><span class="pun">()</span></pre>
+  <p>You can run the program as shown in <a href="https://developers.google.cn/optimization/introduction/python#simple_example">Running a Python program</a>
+  above.</p>
+
+<h3 id="output">Optimal solution</h3>
+    <p>The program returns the optimal solution to the problem, as shown below.
+    </p><pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div>Number of variables = 2
+Number of constraints = 3
+Solution:
+x = 6.0
+y = 4.0
+Optimal objective value = 34.0</pre>
+    <p></p>
+
+    <p>Here is a graph showing the solution:</p>
+    <img src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/feasible_region_solution.png">
+    <p>The dashed green line is defined by setting the objective function
+      equal to its optimal value of 34. Any line whose equation has the form
+      3<span style="font-style:italic">x</span> + 4<span style="font-style:italic">y</span> = c
+      is parallel to the dashed line, and 34 is the largest value of c for which the line
+      intersects the feasible region.</p>
+
+      <p>If you think about the geometry in the above graph,
+      in any linear optimization problem at least one
+      vertex of the feasible region must
+      be an optimal solution. As a result, you can find an optimal solution by traversing the vertices
+      of the feasible region until there is no more improvement in the objective function.
+      This is the idea behind <a href="https://en.wikipedia.org/wiki/Simplex_algorithm">simplex
+        algorithm</a>, the most widely-used method for solving linear optimization problems.</p>
+    <p>To learn more about solving linear optimization problems, see <a href="https://developers.google.cn/optimization/lp/glop">
+      The Glop linear solver</a>.</p>
+
+
+    <h2 id="more-python-examples"><a href="https://developers.google.cn/optimization/introduction/python#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a><a id="examples"></a>More Python examples</h2>
+    <p>OR-Tools includes a number of Python example programs
+      that illustrate how to solve various types of
+      optimization problems. The examples are available on
+      <a href="https://github.com/google/or-tools/tree/master/examples/python">GitHub</a><a>.</a></p><a>
+
+ <h2 id="solver"><a href="https://developers.google.cn/optimization/introduction/python#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Identifying the type of problem you wish to solve</h2>
+    <p>There are many different types of optimization problems in the world.
+      For each type of problem, there are
+      different approaches and algorithms for finding an optimal solution.
+      Before you can start writing a program to solve an optimization problem, you need to
+      identify what type of problem you are dealing with, and then choose an appropriate
+      <em>solver</em> — an algorithm for finding an optimal solution.</p>
+      <p>Below you will find a brief overview of the types of problems that OR-Tools solves,
+      and links to the sections in this guide that explain how to solve each problem type.
+     </p>
+
+    </a><ul><a>
+      </a><li><a></a><a href="https://developers.google.cn/optimization/introduction/python#linear">Linear optimization</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#cp">Constraint optimization</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#mip">Mixed-integer optimization</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#bin_packing">Bin packing</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#graph">Network flows</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#assignment">Assignment</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#scheduling">Scheduling</a></li>
+      <li><a href="https://developers.google.cn/optimization/introduction/python#routing">Routing</a></li>
+    </ul>
+
+    <h3 id="linear">Linear optimization</h3>
+      <p>As you learned in the
+        <a href="https://developers.google.cn/optimization/introduction/python#lp">previous section</a>,
+        a linear optimization
+        problem is one in which the objective function and
+        the constraints linear expressions in the variables.
+        The primary solver in OR-Tools for this type of problem is the
+        linear optimization solver, which is actually a wrapper for several different
+        libraries for linear and <a href="https://developers.google.cn/optimization/introduction/python#mip">mixed-integer
+        optimization</a>, including third-party libraries.</p>
+    <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/lp">
+      Learn more about linear optimization</a></span></p>
+
+    <h3 id="cp">Constraint optimization</h3>
+    <p>Constraint optimization, or constraint programming (CP), identifies feasible solutions out of
+    a very large set of candidates, where the problem can be modeled in terms of arbitrary
+    constraints. CP is based on feasibility (finding a feasible solution) rather than optimization
+    (finding an optimal solution) and focuses on the constraints and variables rather than the
+    objective function. However, CP can be used to solve optimization problems, simply by
+    comparing the values of the objective function for all feasible solutions.</p>
+    <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/cp">
+      Learn more about constraint optimization</a></span></p>
+
+    <h3 id="mip">Mixed-integer optimization</h3>
+    <p>A <em>mixed integer optimization</em> problem is one in which some or all of the variables
+       are required to be integers. An example is the
+      <a href="https://developers.google.cn/optimization/introduction/python#assignment">assignment problem</a>, in
+      which a group of workers needs be assigned to a set of tasks. For each worker and task,
+      you define a variable whose value is 1
+      if the given worker is assigned to the given task, and 0 otherwise. In this case,
+      the variables can only take on the values 0 or 1.</p>
+    <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/mip">
+      Learn more about mixed-integer optimization</a></span></p>
+
+    <h3 id="bin_packing">Bin packing</h3>
+    <p><em>Bin packing</em> is the problem of packing a set of objects of different sizes into
+      containers with different capacities. The goal is to pack as many of the
+      objects as possible, subject to the capacities of the containers. A special case of this
+      is the <em>knapsack problem</em>, in which there is just one container.</p>
+     <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/bin">
+      Learn more about bin packing</a></span></p>
+
+    <h3 id="graph">Network flows</h3>
+    <p>Many optimization problems can be represented by a directed graph consisting of nodes
+      and directed arcs between them. For example, transportation problems, in which goods are
+      shipped across a railway network, can be represented by a graph in which
+      the arcs are rail lines and the nodes are distribution centers.
+      In the <em>maximum flow problem</em>, each arc
+        has a maximum capacity that can be transported across it. The problem is
+        to assign the amount of goods to be shipped across each arc so that the total quantity
+        being transported is as large as possible. </p>
+    <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/flow/">
+      Learn more about network flows</a></span></p>
+
+    <h3 id="assignment">Assignment</h3>
+    <p><em>Assignment</em> problems involve assigning a group of agents (say, workers or machines)
+      to a set of tasks, where there is
+    a fixed cost for assigning each agent to a specific task. The problem is
+    to find the assignment with the least total cost. Assignment problems are actually a special case
+      of <a href="https://developers.google.cn/optimization/introduction/python#graph">network flow problems</a>.</p>
+     <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/assignment/simple_assignment">
+      Learn more about assignment</a></span></p>
+
+    <h3 id="scheduling">Scheduling</h3>
+    <p><em>Scheduling problems</em> involve assigning resources to perform a set of tasks at
+      specific times. An important example is the <em>job shop problem</em>, in which multiple jobs
+      are processed on several machines.
+    Each job consists of a sequence of tasks, which must be performed in a given order, and each
+    task must be processed on a specific machine. The problem is to assign a schedule so that
+    all jobs are completed in as short an interval of time as possible.</p>
+    <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/scheduling">
+      Learn more about scheduling</a></span></p>
+
+    <h3 id="routing">Routing</h3>
+    <p><em>Routing</em> problems involve finding the optimal
+    routes for a fleet of vehicles to traverse a network, defined by a directed graph.
+    The problem of assigning packages to delivery trucks, described in
+    <a href="https://developers.google.cn/optimization/introduction/python#optimization">What is an optimization
+    problem?</a>, is one example of a routing problem. Another is the
+    <a href="https://developers.google.cn/optimization/routing/tsp/tsp">traveling salesman
+    problem</a>.</p>
+    <p><span style="font-size:120%"><a href="https://developers.google.cn/optimization/routing">
+      Learn more about routing</a></span></p>
+
+  
+  </div>
+  
+
+  
+        
+  
+
+
+
+
+
+
+
+        
+<div class="devsite-content-footer nocontent">
+  
+  
+    <p>Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see our <a href="https://developers.google.cn/terms/site-policies">Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+  
+
+  
+    
+    <p class="devsite-content-footer-date" itemprop="datePublished" content="2018-11-30T13:31:05.774061">
+      
+      上次更新日期：十一月 30, 2018
+    </p>
+  
+
+</div>
+
+        </article>
+      </article>
+  
+
+        </div>
+      
+
+<footer class="devsite-footer-promos nocontent"><nav class="devsite-full-site-width"><ul class="devsite-footer-promos-list"><li class="devsite-footer-promo"><a href="http://github.com/google/or-tools" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo"><img class="devsite-footer-promo-icon" src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/logo-github.svg">
+          
+          
+            GitHub
+          
+        </a><div class="devsite-footer-promo-description">Download our code</div></li><li class="devsite-footer-promo"><a href="https://groups.google.com/forum/#!forum/or-tools-discuss" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。"><img class="devsite-footer-promo-icon" src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/groups_24dp.png">
+          
+          
+            Discussion forum
+          
+        </a><div class="devsite-footer-promo-description">Visit our forum</div></li><li class="devsite-footer-promo"><a href="http://or-tools.blogspot.com/" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。"><img class="devsite-footer-promo-icon" src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/blogger_24dp.png">
+          
+          
+            Blog
+          
+        </a><div class="devsite-footer-promo-description">Read our blog</div></li></ul></nav></footer><footer class="devsite-footer-linkboxes nocontent
+               devsite-footer-linkboxes-all-backup
+               devsite-footer-linkboxes-with-sites"><nav class="devsite-full-site-width"><ul class="devsite-footer-linkboxes-list"><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">社交沟通</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="http://developers.googleblog.cn/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Blog Link">
+                博客
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://www.facebook.com/Google-Developers-967415219957038/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Facebook Link">
+                Facebook
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://plus.google.com/+GoogleDevelopers" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer G+ Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google+
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://medium.com/google-developers" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Medium Link">
+                Medium
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://twitter.com/googledevs" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Twitter Link">
+                Twitter
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://www.youtube.com/channel/UCQqa5UIHtrnpiADC3eHFupw" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer YouTube Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                YouTube
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">计划</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://www.womentechmakers.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Women Techmakers">
+                Women Techmakers
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/agency/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Agency">
+                Agency Program
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/groups/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Groups">
+                GDG
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/experts/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Experts">
+                Google Developers Experts
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/startups/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Startups">
+                Startup Launchpad
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://userresearch.google.com/?reserved=0&amp;utm_source=developers.google.com&amp;Q_Language=en&amp;utm_medium=own_srch&amp;utm_campaign=Global-developers&amp;utm_term=0&amp;utm_content=0&amp;productTag=clou&amp;campaignDate=nov18&amp;pType=devel&amp;referral_code=js564523" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer User Studies" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                User Studies
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">开发者控制台</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://console.developers.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Developers Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google API Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.cloud.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Cloud Platform Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Cloud Platform Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://play.google.com/apps/publish/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Play Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Play Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.firebase.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Firebase Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Firebase Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.actions.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Actions on Google Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Actions on Google Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://cast.google.com/publish/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Cast SDK Developer Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Cast SDK Developer Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://chrome.google.com/webstore/developer/dashboard" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Chrome Web Store Developer Dashboard" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Chrome Web Store Dashboard
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-sites"><a href="https://developers.google.cn/" class="gc-analytics-event devsite-footer-linkbox-logo-link" data-category="Site-Wide Custom Events" data-label="Footer Google Developers Link"><img class="devsite-footer-linkbox-logo" src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/lockup-color-knockout.png" alt="Google Developers"></a><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://developer.android.google.cn/index.html" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Link">
+                Android
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developer.chrome.com/home" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Chrome Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Chrome
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://firebase.google.cn/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Firebase Link">
+                Firebase
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://cloud.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Cloud Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Cloud Platform
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/products/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Products Link">
+                所有产品
+            </a></li></ul></li></ul></nav></footer><footer class="devsite-utility-footer"><nav class="devsite-utility-footer-nav devsite-nav devsite-full-site-width"><div class="devsite-utility-footer-nav-left"><form class="devsite-utility-footer-language" action="https://developers.google.cn/i18n/setlang/" method="post"><input type="hidden" name="xsrf_token" value="tc1dFhE7hY29fw3_4Oprq3sA3rAhmajAuL3htD879EM6MTU0NzAxNzM1NDk0Mjg3Ng"><input type="hidden" name="next" value="/optimization/introduction/python"><select class="devsite-utility-footer-language-select kd-select" name="language" track-type="languageSelector" track-name="click" style="display: none;"><option value="id" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="id" track-metadata-original-language="zh-cn" track-metadata-selected-language="id">
+            Bahasa Indonesia
+          </option><option value="de" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="de" track-metadata-original-language="zh-cn" track-metadata-selected-language="de">
+            Deutsch
+          </option><option value="en" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="en" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </option><option value="es" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="es" track-metadata-original-language="zh-cn" track-metadata-selected-language="es">
+            español
+          </option><option value="fr" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="fr" track-metadata-original-language="zh-cn" track-metadata-selected-language="fr">
+            français
+          </option><option value="pt-br" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="pt-br" track-metadata-original-language="zh-cn" track-metadata-selected-language="pt-br">
+            Português Brasileiro
+          </option><option value="ru" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ru" track-metadata-original-language="zh-cn" track-metadata-selected-language="ru">
+            Русский
+          </option><option value="ja" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ja" track-metadata-original-language="zh-cn" track-metadata-selected-language="ja">
+            日本語
+          </option><option value="zh-cn" selected="selected" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="zh-cn" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </option><option value="ko" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ko" track-metadata-original-language="zh-cn" track-metadata-selected-language="ko">
+            한국어
+          </option></select><span class="kd-button kd-menubutton kd-select" track-type="languageSelector" track-name="click"><div class="label">
+            简体中文
+          </div><div class="kd-disclosureindicator"></div></span></form><span class="devsite-utility-footer-links"><a class="devsite-utility-footer-link gc-analytics-event" href="https://developers.google.cn/terms/site-terms" data-category="Site-Wide Custom Events" data-label="Footer terms link" data-footer-link-id="terms">条款
+         </a><a class="devsite-utility-footer-link gc-analytics-event" href="https://policies.google.cn/privacy" data-category="Site-Wide Custom Events" data-label="Footer privacy link" data-footer-link-id="privacy" data-cookie-policy="//policies.google.cn/technologies/cookies">隐私权
+         </a></span></div></nav></footer><div class="devsite-feedback-dialog devsite-dialog"><div class="devsite-dialog-contents"><h3>发送以下问题的反馈：</h3><div class="devsite-feedback-item"><a data-type="documentation" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Docs Feedback Image" track-type="feedback" track-name="feedbackDocIcon" track-metadata-position="header"><div class="devsite-feedback-item-icon-container"><div class="devsite-feedback-item-icon-white devsite-feedback-item-icon-docs
+                        material-icons"></div></div></a><div class="devsite-feedback-item-name">
+          
+          此网页
+        </div><div class="devsite-feedback-item-description"><a data-type="documentation" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Docs Feedback Text" track-type="feedback" track-name="feedbackDocText" track-metadata-position="header">
+            
+            文档反馈
+          </a></div></div><div class="devsite-feedback-item"><a data-type="product" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Product Feedback Image" track-type="feedback" track-name="feedbackProductIcon" track-metadata-position="header"><img src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/orLogo.png" class="devsite-feedback-item-icon" alt="OR-Tools"></a><div class="devsite-feedback-item-name">
+        OR-Tools
+        </div><div class="devsite-feedback-item-description"><a data-type="product" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Product Feedback Text" track-type="feedback" track-name="feedbackProductText" track-metadata-position="header">
+            
+            产品反馈
+          </a></div></div></div><div class="devsite-dialog-buttons"><button type="button" class="devsite-feedback-cancel button-white gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Cancel Feedback Button" track-type="feedback" track-name="cancelFeedbackButton" track-metadata-position="header">
+        
+        取消
+      </button></div></div><script>
+  $(document).ready(function() {
+    new devsite.feedback.Widget({
+        'product_id': '106275',
+        'bucket': '',
+        'context': 'DevSite feedback link',
+        'version': 'devsite-20190107-r00-rc01.default'
+      },
+      document.querySelectorAll('.devsite-feedback-button'),
+      'zh-cn',
+      document.querySelector('.devsite-site-mask'),
+      document.querySelector('.devsite-feedback-dialog'),
+      document.querySelector('.devsite-feedback-cancel'),
+      document.querySelectorAll('.devsite-feedback-item a:not([href])')
+    );
+  });
+  </script></div><script async="" defer="" src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/api.js"></script><script src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/saved_resource"></script><script src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/script_foot_closure__zh_cn.js"></script><script src="./Using OR-Tools with Python  _  OR-Tools  _  Google Developers_files/script_foot.js"></script><script>
+        (function($) {
+          
+          devsite.devsite.Init($, {'ENABLE_BLOCKED_VIDEO_PLACEHOLDER': 1, 'SITE_NAME': 'devsite_china', 'FULL_SITE_SEARCH_ENABLED': 0, 'ENABLE_CLOUDTRACK': 0, 'VTAGS_ENABLED': 0, 'HISTORY_ENABLED': 0, 'SIDEBAR_MINI_ENABLED': 0, 'VERSION_HASH': '0ee1984e83', 'SCRIPTSAFE_DOMAIN': 'google-developers.gonglchuangl.net', 'ENABLE_BLOCKED_LINK_TOOLTIP': 1, 'ALLOWED_HOSTS': ['.android.com', '.appspot.com', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.tensorflow.org'], 'BLOCK_RSS_FEEDS': 1},
+                               '[]','zh-cn',
+                               true, '',
+                               {"8e03e230de0bd8a6fe173fdf172e8b3f": true, "8de7a048f21618359bd37f5ce44be073": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "d169d485cf24243a263783dbe42029b1": true, "039e5d84b87fd75807ffb37b7f1bbf2c": true, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true, "098dafe57affddc137df300142652cfd": false}, '/optimization/',
+                               'https://developers.google.cn/');
+        })(jQuery);
+
+        
+        devsite.localInit = function() {
+          
+        };
+
+      </script><script>
+      $('.devsite-utility-footer-language-select').each(function() {
+        $(this).change(function(){$('.devsite-utility-footer-language').submit();});
+      });
+      </script></div><span id="devsite-request-elapsed" data-request-elapsed="191.541194916"></span>
+<ul class="kd-menulist devsite-hidden" style="left: 151.386px; right: auto; top: 9948.86px;"><li class="kd-menulistitem" value="id" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="id" track-metadata-original-language="zh-cn" track-metadata-selected-language="id">
+            Bahasa Indonesia
+          </li><li class="kd-menulistitem" value="de" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="de" track-metadata-original-language="zh-cn" track-metadata-selected-language="de">
+            Deutsch
+          </li><li class="kd-menulistitem" value="en" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="en" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </li><li class="kd-menulistitem" value="es" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="es" track-metadata-original-language="zh-cn" track-metadata-selected-language="es">
+            español
+          </li><li class="kd-menulistitem" value="fr" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="fr" track-metadata-original-language="zh-cn" track-metadata-selected-language="fr">
+            français
+          </li><li class="kd-menulistitem" value="pt-br" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="pt-br" track-metadata-original-language="zh-cn" track-metadata-selected-language="pt-br">
+            Português Brasileiro
+          </li><li class="kd-menulistitem" value="ru" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ru" track-metadata-original-language="zh-cn" track-metadata-selected-language="ru">
+            Русский
+          </li><li class="kd-menulistitem" value="ja" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ja" track-metadata-original-language="zh-cn" track-metadata-selected-language="ja">
+            日本語
+          </li><li class="kd-menulistitem devsite-selected-option" value="zh-cn" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="zh-cn" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </li><li class="kd-menulistitem" value="ko" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ko" track-metadata-original-language="zh-cn" track-metadata-selected-language="ko">
+            한국어
+          </li></ul></body></html>

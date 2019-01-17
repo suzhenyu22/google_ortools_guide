@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://developers.google.cn/optimization/mip/integer_opt_cp -->
+<html lang="en" class="" ml-update="aware"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/linkid.js"></script><script async="" src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/analytics.js"></script><script>var a=window.devsite||{};window.devsite=a;a.readyCallbacks=[];window.devsite.readyCallbacks=a.readyCallbacks;a.ready=function(b){a.readyCallbacks.push(b)};window.devsite.ready=a.ready;
+</script><meta name="xsrf_token" content="03j0sjGz3hebpPpcKRBTVT1_tWv10eO00quLIgtRzr46MTU0NzAxNzU0NjMwNzg2Mg"><link rel="canonical" href="https://developers.google.com/optimization/mip/integer_opt_cp"><link rel="alternate" href="https://developers.google.com/optimization/mip/integer_opt_cp" hreflang="en"><link rel="alternate" href="https://developers.google.cn/optimization/mip/integer_opt_cp" hreflang="en-cn"><link rel="alternate" href="https://developers.google.com/optimization/mip/integer_opt_cp" hreflang="x-default"><link rel="shortcut icon" href="https://developers.google.cn/_static/0ee1984e83/images/favicon.png"><link rel="apple-touch-icon" href="https://developers.google.cn/_static/0ee1984e83/images/touch-icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/css"><link rel="stylesheet" href="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/devsite-google-blue.css"><script src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/jquery-bundle.js"></script><meta property="og:site_name" content="Google Developers"><meta property="og:type" content="website"><meta property="og:url" content="https://developers.google.com/optimization/mip/integer_opt_cp"><meta property="og:locale" content="en"><script>
+    var ___gcfg = ___gcfg || {};
+    ___gcfg.lang = 'zh-cn';
+  </script><title>CP Approach to Integer Optimization &nbsp;|&nbsp; OR-Tools
+      &nbsp;|&nbsp; Google Developers</title><meta property="og:title" content="CP Approach to Integer Optimization  |  OR-Tools
+       |  Google Developers"></head><body class="devsite-doc-page devsite-header-no-upper-tabs no-touch" data-family="endorsed" id="top_of_page"><div class="devsite-wrapper" style="margin-top: 0px;"><div class="devsite-top-section-wrapper
+            "><header class="devsite-top-section nocontent devsite-top-section-pinned"><div class="devsite-top-logo-row-wrapper-wrapper" style="position: relative;"><div class="devsite-top-logo-row-wrapper"><div class="devsite-top-logo-row devsite-full-site-width"><button type="button" class="devsite-expand-section-nav devsite-header-icon-button
+                                       button-flat material-icons gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Hamburger menu"></button><div class="devsite-product-name-wrapper"><a class="devsite-product-name-link gc-analytics-event" href="https://developers.google.cn/optimization/" data-category="Site-Wide Custom Events" data-label="Project logo (header)"><img src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/orLogo.png" class="devsite-product-logo" alt="Google OR-Tools"></a><span class="devsite-product-name"><ul class="devsite-breadcrumb-list"><li class="devsite-breadcrumb-item"><a href="https://developers.google.cn/optimization/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Upper Header" data-value="1">
+    
+    
+      
+        Google OR-Tools
+      
+    
+    
+    </a></li></ul></span></div><div class="devsite-header-upper-tabs"></div><form class="devsite-search-form" action="https://developers.google.cn/s/results/" method="GET" id="top-search" search-placeholder="搜索"><div id="searchbox" class="devsite-searchbox"><input placeholder="搜索" type="text" class="devsite-search-field devsite-search-query" name="q" value="" autocomplete="off" aria-label="搜索框"><div class="devsite-search-image material-icons"></div></div><input type="hidden" name="p" id="search_project" value="/optimization/" data-project-name="OR-Tools" data-project-path="/optimization/" data-query-match=""><input type="hidden" class="suggest-project" value="OR-Tools"><div class="suggest-project-metadata" data-home_url="/optimization/" data-path="/optimization/" data-name="OR-Tools"></div><div class="devsite-popout devsite-popout-closed"><div class="devsite-suggest-results" style="display: none;"></div></div></form><a class="devsite-header-link devsite-top-button button gc-analytics-event" href="https://developers.google.cn/products/" data-category="Site-Wide Custom Events" data-label="Site header link" track-type="globalNav" track-name="所有产品" track-metadata-position="nav" track-metadata-eventdetail="nav"><div class="devsite-header-link-icon material-icons">
+                  list
+                </div><div class="devsite-header-link-label">所有产品</div></a><button type="button" class="devsite-search-button devsite-header-icon-button button-flat
+                                       material-icons"></button></div></div></div><div class="devsite-collapsible-section" style="margin-top: 0px;"><div class="devsite-header-background devsite-full-site-width"><div class="devsite-doc-set-nav-row devsite-full-site-width"><nav class="devsite-doc-set-nav devsite-nav devsite-overflow-tabs-scroll-wrapper"><ul class="devsite-doc-set-nav-tab-list devsite-overflow-tabs-scroll" style="min-width: 550px; left: 0px;"><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: 首页">
+          首页
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/install" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Installation">
+          Installation
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-doc-set-nav-active devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" aria-label="Guides, selected" data-category="Site-Wide Custom Events" data-label="Tab: Guides">
+          Guides
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/reference" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Reference">
+          Reference
+        </a></li><li class="devsite-doc-set-nav-tab-container devsite-nav-tab
+                 "><a href="https://developers.google.cn/optimization/support/overview" class=" devsite-nav-tab
+                  devsite-doc-set-nav-tab devsite-doc-set-nav-tab-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Tab: Support">
+          Support
+        </a></li></ul><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-forward devsite-hidden" aria-label="滚动标签"></button><button type="button" class="devsite-overflow-tabs-scroll-button devsite-top-button material-icons devsite-scroll-back devsite-hidden" aria-label="滚动标签"></button></nav></div></div></div></header><script>
+    if (window.jQuery) {
+      $(document).ready(function() {
+        if (window.devsite && window.devsite.search) {
+          
+          window.devsite.search.init('zh-cn')
+        }
+      });
+    }
+  </script></div><div id="gc-wrapper" itemscope="" itemtype="http://schema.org/Article"><input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {}, &quot;gaid&quot;: &quot;UA-10115507-7&quot;}"><input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: &quot;en&quot;, &quot;dimension4&quot;: &quot;OR-Tools&quot;, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension1&quot;: &quot;Signed out&quot;, &quot;dimension8&quot;: null}, &quot;gaid&quot;: &quot;UA-24532603-11&quot;}"><script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "CN", "language": {"requested": "zh-cn", "served": "en"}, "projectName": "OR-Tools", "scriptsafe": null, "signedIn": "False", "internalUser": "False"}];
+    </script>
+
+      
+        <div class="devsite-site-mask"></div>
+        
+  
+
+
+<nav class="devsite-nav-responsive devsite-nav nocontent" tabindex="0" style="left: -256px;">
+  
+  <div class="devsite-nav-responsive-tabs-panel devsite-nav-responsive-transition devsite-nav-responsive-transform" style="display: none;">
+    
+      
+
+
+
+<nav class="devsite-nav-responsive-tabs devsite-nav">
+  <ul class="devsite-nav-list">
+  
+
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: 首页"><span>
+          首页
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/install?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Installation"><span>
+          Installation
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <span class="devsite-nav-responsive-forward devsite-nav-responsive-tab devsite-nav-title
+                     devsite-nav-active gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: Guides" tabindex="0"><span>
+          Guides
+        </span></span>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/reference" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Reference"><span>
+          Reference
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      
+        <a href="https://developers.google.cn/optimization/support/overview?nav=true" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event
+                  " data-category="Site-Wide Custom Events" data-label="Responsive Tab: Support"><span>
+          Support
+        </span></a>
+      
+
+      
+
+      
+
+      
+    </li>
+  
+
+  
+    <li class="devsite-nav-item devsite-nav-item-heading">
+      <a href="https://developers.google.cn/products/" class="devsite-nav-responsive-tab devsite-nav-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Responsive Tab: all_products"><span>
+        所有产品
+      </span></a>
+    </li>
+  
+  </ul>
+</nav>
+
+
+    
+  </div>
+  
+  
+  <div class="devsite-nav-responsive-sidebar-panel" style="display: block;">
+    
+    <div class="devsite-nav-responsive-back" tabindex="0"></div>
+    
+    <nav class="devsite-nav-responsive-sidebar">
+      
+      
+    <ul class="devsite-nav-list devsite-nav-expandable devsite-nav-only-accordions"><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Introduction, click to expand/collapse" role="link" tabindex="0"><span>Introduction</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-nav-title"><span>About Combinatorial Optimization</span></a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Get Started with OR-Tools, click to expand/collapse" role="link" tabindex="0"><span>Get Started with OR-Tools</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="1" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/get_started" class="devsite-nav-title"><span>概览</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cpp" class="devsite-nav-title"><span>C++</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python" class="devsite-nav-title"><span>Python</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/java" class="devsite-nav-title"><span>Java</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cs" class="devsite-nav-title"><span>C#</span></a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Linear Optimization, click to expand/collapse" role="link" tabindex="0"><span>Linear Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/glop" class="devsite-nav-title"><span>The Glop Linear Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/add-on" class="devsite-nav-title"><span>Add-on for Google Sheets</span></a></li><li class="devsite-nav-item devsite-nav-external devsite-nav-has-status"><a href="https://developers.google.cn/apps-script/reference/optimization" class="devsite-nav-title"><span class="devsite-nav-text"><span>Service for Apps Script</span></span><span class="devsite-nav-icon-wrapper"><span class="devsite-nav-icon material-icons" data-tooltip-align="b,c" data-tooltip="外部" aria-label="外部" data-title="外部"></span></span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Constraint Optimization, click to expand/collapse" role="link" tabindex="0"><span>Constraint Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_solver" class="devsite-nav-title"><span>CP-SAT Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/original_cp_solver" class="devsite-nav-title"><span>Original CP Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cryptarithmetic" class="devsite-nav-title"><span>Cryptarithmetic</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/queens" class="devsite-nav-title"><span>The N-queens Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_tasks" class="devsite-nav-title"><span>Setting Solver Limits</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Integer Optimization, click to expand/collapse" role="link" tabindex="0"><span>Integer Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt" class="devsite-nav-title"><span>Mixed-Integer Programming</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp" class="devsite-nav-title" data-tooltip-align="b,c" data-tooltip="CP Approach to Integer Optimization" aria-label="CP Approach to Integer Optimization" data-title="CP Approach to Integer Optimization"><span>CP Approach to Integer Optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/sudoku" class="devsite-nav-title"><span>Sudoku Add-on for Google Sheets</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Routing, click to expand/collapse" role="link" tabindex="0"><span>Routing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/tsp" class="devsite-nav-title"><span>Traveling Salesman Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/vrp" class="devsite-nav-title"><span>Vehicle Routing Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrp" class="devsite-nav-title"><span>Capacity Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw" class="devsite-nav-title"><span>Time Window Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw_resources" class="devsite-nav-title"><span>Resource Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/penalties" class="devsite-nav-title"><span>Dropping Visits in Infeasible Problems-Penalties</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_tasks" class="devsite-nav-title"><span>Common Vehicle Routing Tasks</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_options" class="devsite-nav-title"><span>Routing Options</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/google_direction" class="devsite-nav-title"><span>Google Direction API</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Bin Packing, click to expand/collapse" role="link" tabindex="0"><span>Bin Packing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin/knapsack" class="devsite-nav-title"><span>Knapsacks</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Network Flows, click to expand/collapse" role="link" tabindex="0"><span>Network Flows</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/maxflow" class="devsite-nav-title"><span>Maximum Flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/mincostflow" class="devsite-nav-title"><span>Minimum Cost Flows</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Assignment, click to expand/collapse" role="link" tabindex="0"><span>Assignment</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/simple_assignment" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_min_cost_flow" class="devsite-nav-title"><span>Assignment as a Min Cost Flow Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_mip" class="devsite-nav-title"><span>Assignment as a MIP Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_cp" class="devsite-nav-title"><span>Assignment with Task Sizes</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_groups" class="devsite-nav-title"><span>Assignment with Allowed Groups</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Scheduling, click to expand/collapse" role="link" tabindex="0"><span>Scheduling</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling" class="devsite-nav-title"><span>Employee Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/job_shop" class="devsite-nav-title"><span>The Job Shop Problem</span></a></li></ul></li></ul></nav>
+  </div>
+  
+  
+</nav>
+
+
+        <div class="devsite-main-content clearfix" style="margin-top: 136px;">
+
+        
+        
+
+        
+  
+  
+    
+    
+      
+  <nav class="devsite-section-nav devsite-nav nocontent" style="left: auto; max-height: 544px; position: relative; top: 0px;">
+    <ul class="devsite-nav-list devsite-nav-expandable devsite-nav-only-accordions"><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Introduction, click to expand/collapse" role="link" tabindex="0"><span>Introduction</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-nav-title"><span>About Combinatorial Optimization</span></a></li><li class="devsite-nav-item devsite-nav-item-section-expandable"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Get Started with OR-Tools, click to expand/collapse" role="link" tabindex="0"><span>Get Started with OR-Tools</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="1" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/get_started" class="devsite-nav-title"><span>概览</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cpp" class="devsite-nav-title"><span>C++</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/python" class="devsite-nav-title"><span>Python</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/java" class="devsite-nav-title"><span>Java</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/introduction/cs" class="devsite-nav-title"><span>C#</span></a></li></ul></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Linear Optimization, click to expand/collapse" role="link" tabindex="0"><span>Linear Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/glop" class="devsite-nav-title"><span>The Glop Linear Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/lp/add-on" class="devsite-nav-title"><span>Add-on for Google Sheets</span></a></li><li class="devsite-nav-item devsite-nav-external devsite-nav-has-status"><a href="https://developers.google.cn/apps-script/reference/optimization" class="devsite-nav-title"><span class="devsite-nav-text"><span>Service for Apps Script</span></span><span class="devsite-nav-icon-wrapper"><span class="devsite-nav-icon material-icons" data-tooltip-align="b,c" data-tooltip="外部" aria-label="外部" data-title="外部"></span></span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Constraint Optimization, click to expand/collapse" role="link" tabindex="0"><span>Constraint Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_solver" class="devsite-nav-title"><span>CP-SAT Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/original_cp_solver" class="devsite-nav-title"><span>Original CP Solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cryptarithmetic" class="devsite-nav-title"><span>Cryptarithmetic</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/queens" class="devsite-nav-title"><span>The N-queens Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/cp/cp_tasks" class="devsite-nav-title"><span>Setting Solver Limits</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Integer Optimization, click to expand/collapse" role="link" tabindex="0"><span>Integer Optimization</span></span><a class="devsite-nav-toggle devsite-nav-toggle-expanded material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0"></a><ul class="devsite-nav-section devsite-nav-section-expanded"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt" class="devsite-nav-title"><span>Mixed-Integer Programming</span></a></li><li class="devsite-nav-item devsite-nav-active"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp" class="devsite-nav-title"><span>CP Approach to Integer Optimization</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/sudoku" class="devsite-nav-title"><span>Sudoku Add-on for Google Sheets</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Routing, click to expand/collapse" role="link" tabindex="0"><span>Routing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/tsp" class="devsite-nav-title"><span>Traveling Salesman Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/vrp" class="devsite-nav-title"><span>Vehicle Routing Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrp" class="devsite-nav-title"><span>Capacity Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw" class="devsite-nav-title"><span>Time Window Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/cvrptw_resources" class="devsite-nav-title"><span>Resource Constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/penalties" class="devsite-nav-title"><span>Dropping Visits in Infeasible Problems-Penalties</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_tasks" class="devsite-nav-title"><span>Common Vehicle Routing Tasks</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/routing_options" class="devsite-nav-title"><span>Routing Options</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/routing/google_direction" class="devsite-nav-title"><span>Google Direction API</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Bin Packing, click to expand/collapse" role="link" tabindex="0"><span>Bin Packing</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/bin/knapsack" class="devsite-nav-title"><span>Knapsacks</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Network Flows, click to expand/collapse" role="link" tabindex="0"><span>Network Flows</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/maxflow" class="devsite-nav-title"><span>Maximum Flows</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/flow/mincostflow" class="devsite-nav-title"><span>Minimum Cost Flows</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Assignment, click to expand/collapse" role="link" tabindex="0"><span>Assignment</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/simple_assignment" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_min_cost_flow" class="devsite-nav-title"><span>Assignment as a Min Cost Flow Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_mip" class="devsite-nav-title"><span>Assignment as a MIP Problem</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_cp" class="devsite-nav-title"><span>Assignment with Task Sizes</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/assignment/assignment_groups" class="devsite-nav-title"><span>Assignment with Allowed Groups</span></a></li></ul></li><li class="devsite-nav-item devsite-nav-item-section-expandable devsite-nav-accordion"><span class="devsite-nav-title devsite-nav-title-no-path" aria-label="Scheduling, click to expand/collapse" role="link" tabindex="0"><span>Scheduling</span></span><a class="devsite-nav-toggle devsite-nav-toggle-collapsed material-icons" track-type="leftNav" track-name="expandNavSectionArrow" track-metadata-position="0" aria-hidden="true"></a><ul class="devsite-nav-section devsite-nav-section-collapsed"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling" class="devsite-nav-title"><span>Overview</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/employee_scheduling" class="devsite-nav-title"><span>Employee Scheduling</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/scheduling/job_shop" class="devsite-nav-title"><span>The Job Shop Problem</span></a></li></ul></li></ul>
+  </nav>
+
+    
+
+    
+  <nav class="devsite-page-nav devsite-nav" style="position: relative; left: auto; max-height: 544px; top: 0px;"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#top_of_page" class="devsite-nav-title"><span>目录</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#which_solver" class="devsite-nav-title"><span>Should I use MIP or CP-SAT?</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#noninteger_constraint" class="devsite-nav-title"><span>Example: transforming non-integer constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution-using-the-cp-sat-solver" class="devsite-nav-title"><span>Solution using the CP-SAT solver</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solver" class="devsite-nav-title"><span>Declare the model</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#variables" class="devsite-nav-title"><span>Create the variables</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#constraints" class="devsite-nav-title"><span>Define the constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#objective" class="devsite-nav-title"><span>Define the objective function</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution" class="devsite-nav-title"><span>Call the solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#program" class="devsite-nav-title"><span>The entire program</span></a></li></ul></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution-using-the-original-cp-solver" class="devsite-nav-title"><span>Solution using the original CP solver</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solver_ori" class="devsite-nav-title"><span>Declare the solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#variables_ori" class="devsite-nav-title"><span>Create the variables</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#constraints_ori" class="devsite-nav-title"><span>Define the constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#objective_ori" class="devsite-nav-title"><span>Define the objective function</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#decision_builder" class="devsite-nav-title"><span>Decision builders</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#collector" class="devsite-nav-title"><span>Create a solution collector</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution_ori" class="devsite-nav-title"><span>Call the solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#program_ori" class="devsite-nav-title"><span>The entire program</span></a></li></ul></li></ul></nav>
+
+
+      <article class="devsite-article">
+        <article class="devsite-article-inner">
+  
+          
+  
+
+
+<div class="devsite-rating-container
+            "><div class="devsite-rating-stars"><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="1" data-category="Site-Wide Custom Events" data-label="Star Rating 1" track-metadata-score="1" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：1 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="2" data-category="Site-Wide Custom Events" data-label="Star Rating 2" track-metadata-score="2" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：2 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="3" data-category="Site-Wide Custom Events" data-label="Star Rating 3" track-metadata-score="3" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：3 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="4" data-category="Site-Wide Custom Events" data-label="Star Rating 4" track-metadata-score="4" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：4 星（最高 5 星）"></div><div class="devsite-rating-star devsite-rating-star-outline gc-analytics-event material-icons" data-rating-val="5" data-category="Site-Wide Custom Events" data-label="Star Rating 5" track-metadata-score="5" track-type="feedback" track-name="rating" track-metadata-position="header" role="button" aria-label="网站内容评分：5 星（最高 5 星）"></div></div><div class="devsite-rating-description"></div><div class="devsite-rating-internal"><span class="devsite-rating-stats"></span></div></div><script>
+  $(document).ready(function() {
+    devsite.ratings.init(
+      document.querySelectorAll('#devsite-feedback-project'), false
+      
+    );
+  });
+</script>
+
+
+  
+  <nav class="devsite-breadcrumb-nav devsite-nav">
+    
+
+
+<ul class="devsite-breadcrumb-list">
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <a href="https://developers.google.cn/products/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="1">
+    
+    
+      产品
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://developers.google.cn/optimization/" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="2">
+    
+    
+      OR-Tools
+    
+    
+    </a>
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item">
+    
+    
+    <div class="devsite-breadcrumb-guillemet material-icons"></div>
+    
+    
+    <a href="https://developers.google.cn/optimization/introduction/overview" class="devsite-breadcrumb-link gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Breadcrumbs" data-value="3">
+    
+    
+      Guides
+    
+    
+    </a>
+    
+  </li>
+  
+</ul>
+
+  </nav>
+  
+  
+  <h1 itemprop="name" class="devsite-page-title">
+    CP Approach to Integer Optimization
+  </h1>
+  
+  
+  <nav class="devsite-page-nav-embedded devsite-nav"><ul class="devsite-page-nav-list"><li class="devsite-nav-item devsite-nav-item-heading"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#top_of_page" class="devsite-nav-title"><span>目录</span></a><button type="button" class="devsite-nav-show-all button-transparent material-icons" data-tooltip-align="b,c" data-tooltip="展开/收起内容" aria-label="展开/收起内容" data-title="展开/收起内容"></button></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#which_solver" class="devsite-nav-title"><span>Should I use MIP or CP-SAT?</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#noninteger_constraint" class="devsite-nav-title"><span>Example: transforming non-integer constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution-using-the-cp-sat-solver" class="devsite-nav-title"><span>Solution using the CP-SAT solver</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solver" class="devsite-nav-title"><span>Declare the model</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#variables" class="devsite-nav-title devsite-nav-item-hidden"><span>Create the variables</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#constraints" class="devsite-nav-title devsite-nav-item-hidden"><span>Define the constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#objective" class="devsite-nav-title devsite-nav-item-hidden"><span>Define the objective function</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution" class="devsite-nav-title devsite-nav-item-hidden"><span>Call the solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#program" class="devsite-nav-title devsite-nav-item-hidden"><span>The entire program</span></a></li></ul></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution-using-the-original-cp-solver" class="devsite-nav-title devsite-nav-item-hidden"><span>Solution using the original CP solver</span></a><ul class="devsite-page-nav-list"><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solver_ori" class="devsite-nav-title devsite-nav-item-hidden"><span>Declare the solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#variables_ori" class="devsite-nav-title devsite-nav-item-hidden"><span>Create the variables</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#constraints_ori" class="devsite-nav-title devsite-nav-item-hidden"><span>Define the constraints</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#objective_ori" class="devsite-nav-title devsite-nav-item-hidden"><span>Define the objective function</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#decision_builder" class="devsite-nav-title devsite-nav-item-hidden"><span>Decision builders</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#collector" class="devsite-nav-title devsite-nav-item-hidden"><span>Create a solution collector</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#solution_ori" class="devsite-nav-title devsite-nav-item-hidden"><span>Call the solver</span></a></li><li class="devsite-nav-item"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#program_ori" class="devsite-nav-title devsite-nav-item-hidden"><span>The entire program</span></a></li></ul></li><li class="devsite-nav-item"><button type="button" class="button-flat devsite-nav-more-items material-icons" aria-hidden="true" data-tooltip-align="b,c" data-tooltip="展开/收起内容" aria-label="展开/收起内容" data-title="展开/收起内容"></button></li></ul></nav>
+  
+  <div class="devsite-article-body clearfix
+            " itemprop="articleBody">
+    
+
+    <p><i>Constraint programming (<abbr data-tooltip-align="b,c" data-tooltip="Constraint Programming" aria-label="Constraint Programming" data-title="Constraint Programming">CP</abbr>)</i> represents a
+       different approach to optimization than
+       that of classical optimization theory. CP is based on
+       <i>feasibility</i> (finding feasible solutions to a problem), and focuses on
+       the constraints and variables rather than the objective function.
+      For many types of problems,
+       CP can find optimal solutions faster than a
+       <abbr data-tooltip-align="b,c" data-tooltip="Mixed Integer Programming" aria-label="Mixed Integer Programming" data-title="Mixed Integer Programming">MIP</abbr> solver.
+    </p>
+    <h2 id="which_solver"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Should I use MIP or CP-SAT?</h2>
+    <p>For standard integer programming problems, in which a feasible point must satisfy
+    <em>all</em> constraints, the MIP solver is faster. In
+    this case, the feasible set is <i>convex</i>: for any two points in the set, the line
+    segment joining them lies entirely in the set.</p>
+    <p>On the other hand, for problems with highly non-convex feasible sets, the CP-SAT solver is
+    often faster than the MIP solver. Such problems arise when the feasible set is defined
+    by many constraints joined by "or," meaning that a point only needs to satisfy
+    one of the constraints to be feasible. For an example, see
+    <a href="https://developers.google.cn/optimization/assignment/assignment_groups">Assignment with allowed groups</a>.</p>
+
+    <h2 id="noninteger_constraint"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Example: transforming non-integer constraints</h2>
+    <p>To increase computational speed, both the CP-SAT solver and the original CP solver work
+    over the integers. To solve a problem in which some of the constraints have
+    non-integer terms, you must first transform those constraints by multiplying them by a
+    sufficiently large integer. The following example and solution illustrate this.</p>
+      <dl>
+        <dt>Maximize 2<em>x</em> + 2<em>y</em> + 3<em>z</em>
+          subject to the following constraints:</dt>
+          <dd>
+            <div class="devsite-table-wrapper"><table border="0" style="width:175px">
+              <tbody><tr>
+                <td><em>x</em> + <sup>7</sup>⁄<sub>2</sub>
+                 <em>y</em> + <sup>3</sup>⁄<sub>2</sub> <em>z</em></td><td>≤</td><td>25</td>
+              </tr>
+               <tr>
+                <td>3<em>x</em> - 5<em>y</em> + 7<em>z</em></td><td>≤</td><td>45</td>
+              </tr>
+              <tr>
+                <td>5<em>x</em> + 2<em>y</em> - 6<em>z</em></td><td>≤</td><td>37</td>
+              </tr>
+              <tr>
+                <td><em>x</em>, <em>y</em>, <em>z</em></td><td>≥</td><td>0</td>
+              </tr>
+              <tr>
+                <td colspan="3"><em>x</em>, <em>y</em>, <em>z</em> integers</td>
+              </tr>
+            </tbody></table></div>
+          </dd>
+      </dl>
+
+    <p>Since the first constraint has non-integer terms, it must be transformed into one with
+    all integer terms. This is shown in the <a href="https://developers.google.cn/optimization/mip/integer_opt_cp#constraints">Constraints</a> section below.</p>
+
+    <h2 id="solution-using-the-cp-sat-solver"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Solution using the CP-SAT solver</h2>
+    <p>The following sections present a Python program that solves the problem above
+      using the CP-SAT solver. We don't particularly recommend using the CP-SAT solver
+      for a problem like this, instead of the MIP solver.
+      The purpose of the example is just
+      to show how to set up an integer programming problem for CP-SAT,
+      and how to transform non-integer constraints.</p>
+
+     <p>Some sections of the program are quite similar to the
+      <a href="https://developers.google.cn/optimization/mip/integer_opt.html">MIP program</a> described previously,
+      but there are some significant differences, particularly in defining
+        the constraints and objective. If you're planning on
+      using both solvers, it's worthwhile to compare these two examples.
+    </p>
+    <h3 id="solver">Declare the model</h3>
+    <p>The following code declares the model for the problem.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">sat</span><span class="pun">.</span><span class="pln">python </span><span class="kwd">import</span><span class="pln"> cp_model<br><br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; model </span><span class="pun">=</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="typ">CpModel</span><span class="pun">()</span></pre>
+
+    <h3 id="variables">Create the variables</h3>
+    <p>The following code creates the variables for the problem.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; var_upper_bound </span><span class="pun">=</span><span class="pln"> max</span><span class="pun">(</span><span class="lit">50</span><span class="pun">,</span><span class="pln"> </span><span class="lit">45</span><span class="pun">,</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span><span class="pln"><br>&nbsp; x </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewIntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'x'</span><span class="pun">)</span><span class="pln"><br>&nbsp; y </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewIntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'y'</span><span class="pun">)</span><span class="pln"><br>&nbsp; z </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewIntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'z'</span><span class="pun">)</span></pre>
+
+    <h3 id="constraints">Define the constraints</h3>
+    <p>As noted above, the CP-SAT solver works over the integers. Since the first constraint,</p>
+    <div class="devsite-table-wrapper"><table border="0" style="width:175px">
+      <tbody><tr>
+        <td><em>x</em> + <sup>7</sup>⁄<sub>2</sub>
+            <em>y</em> + <sup>3</sup>⁄<sub>2</sub> <em>z</em></td><td>≤</td><td>25</td>
+      </tr>
+    </tbody></table></div>
+    <p>has non-integer terms, you must first multiply the entire constraint by a sufficiently
+    large integer so that all terms are integers. In this case, you can multiply by 2, which
+    results in the new constraint</p>
+    <div class="devsite-table-wrapper"><table border="0" style="width:150px">
+      <tbody><tr>
+        <td>2<em>x</em> + 7<em>y</em> + 3<em>z</em></td><td>≤</td><td>50</td>
+      </tr>
+    </tbody></table></div>
+    <p>This doesn't change the problem, since the solution set for the original constraint is the
+    same as for the transformed constraint.</p>
+    <p>The following code defines the three linear constraints for the problem:
+</p><pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">50</span><span class="pun">)</span><span class="pln"><br>&nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">3</span><span class="pun">*</span><span class="pln">x </span><span class="pun">-</span><span class="pln"> </span><span class="lit">5</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">45</span><span class="pun">)</span><span class="pln"><br>&nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">5</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">-</span><span class="pln"> </span><span class="lit">6</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span></pre>
+
+    <h3 id="objective">Define the objective function</h3>
+    <p>The following code defines the objective function for the problem
+    and declares it to be a maximization problem:
+</p><pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; model</span><span class="pun">.</span><span class="typ">Maximize</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z</span><span class="pun">)</span></pre>
+
+    <h3 id="solution">Call the solver</h3>
+    <p>The following code calls the solver and displays the results.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; solver </span><span class="pun">=</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="typ">CpSolver</span><span class="pun">()</span><span class="pln"><br>&nbsp; status </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">(</span><span class="pln">model</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="kwd">if</span><span class="pln"> status </span><span class="pun">==</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="pln">OPTIMAL</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Maximum of objective function: %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">ObjectiveValue</span><span class="pun">())</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">()</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'x value: '</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">x</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'y value: '</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">y</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'z value: '</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">z</span><span class="pun">))</span></pre>
+    <p>The output is shown below:</p>
+<pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div>Maximum of objective function: 35
+
+x value:  7
+y value:  3
+z value:  5</pre>
+
+<h3 id="program">The entire program</h3>
+    <p>The entire program is shown below.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="kwd">from</span><span class="pln"> __future__ </span><span class="kwd">import</span><span class="pln"> print_function<br></span><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">sat</span><span class="pun">.</span><span class="pln">python </span><span class="kwd">import</span><span class="pln"> cp_model<br><br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; model </span><span class="pun">=</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="typ">CpModel</span><span class="pun">()</span><span class="pln"><br>&nbsp; var_upper_bound </span><span class="pun">=</span><span class="pln"> max</span><span class="pun">(</span><span class="lit">50</span><span class="pun">,</span><span class="pln"> </span><span class="lit">45</span><span class="pun">,</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span><span class="pln"><br>&nbsp; x </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewIntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'x'</span><span class="pun">)</span><span class="pln"><br>&nbsp; y </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewIntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'y'</span><span class="pun">)</span><span class="pln"><br>&nbsp; z </span><span class="pun">=</span><span class="pln"> model</span><span class="pun">.</span><span class="typ">NewIntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'z'</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">50</span><span class="pun">)</span><span class="pln"><br>&nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">3</span><span class="pun">*</span><span class="pln">x </span><span class="pun">-</span><span class="pln"> </span><span class="lit">5</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">45</span><span class="pun">)</span><span class="pln"><br>&nbsp; model</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">5</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">-</span><span class="pln"> </span><span class="lit">6</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; model</span><span class="pun">.</span><span class="typ">Maximize</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; solver </span><span class="pun">=</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="typ">CpSolver</span><span class="pun">()</span><span class="pln"><br>&nbsp; status </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">(</span><span class="pln">model</span><span class="pun">)</span><span class="pln"><br><br>&nbsp; </span><span class="kwd">if</span><span class="pln"> status </span><span class="pun">==</span><span class="pln"> cp_model</span><span class="pun">.</span><span class="pln">OPTIMAL</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'Maximum of objective function: %i'</span><span class="pln"> </span><span class="pun">%</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">ObjectiveValue</span><span class="pun">())</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">()</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'x value: '</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">x</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'y value: '</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">y</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'z value: '</span><span class="pun">,</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">z</span><span class="pun">))</span><span class="pln"><br><br><br></span><span class="kwd">if</span><span class="pln"> __name__ </span><span class="pun">==</span><span class="pln"> </span><span class="str">'__main__'</span><span class="pun">:</span><span class="pln"><br>&nbsp; main</span><span class="pun">()</span></pre>
+
+    <h2 id="solution-using-the-original-cp-solver"><a href="https://developers.google.cn/optimization/mip/integer_opt_cp#top_of_page" class="devsite-back-to-top-link material-icons" data-tooltip-align="b,c" data-tooltip="返回页首" aria-label="返回页首" data-title="返回页首"></a>Solution using the original CP solver</h2>
+    <p>The following sections present a Python program that solves the <a href="https://developers.google.cn/optimization/mip/integer_opt_cp#problem">
+    integer optimization problem</a>
+      using the original CP solver. (However, we recommend the faster CP-SAT solver.)
+    </p><h3 id="solver_ori">Declare the solver</h3>
+    <p> the following code declares the solver.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">constraint_solver </span><span class="kwd">import</span><span class="pln"> pywrapcp<br></span><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">constraint_solver </span><span class="kwd">import</span><span class="pln"> solver_parameters_pb2<br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; </span><span class="com"># Instantiate a CP solver.</span><span class="pln"><br>&nbsp; parameters </span><span class="pun">=</span><span class="pln"> pywrapcp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">.</span><span class="typ">DefaultSolverParameters</span><span class="pun">()</span><span class="pln"><br>&nbsp; solver </span><span class="pun">=</span><span class="pln"> pywrapcp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">(</span><span class="str">'simple_CP'</span><span class="pun">,</span><span class="pln"> parameters</span><span class="pun">)</span></pre>
+
+    <h3 id="variables_ori">Create the variables</h3>
+    <p>The following code creates the variables.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; var_upper_bound </span><span class="pun">=</span><span class="pln"> max</span><span class="pun">(</span><span class="lit">50</span><span class="pun">,</span><span class="pln"> </span><span class="lit">45</span><span class="pun">,</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span><span class="pln"><br>&nbsp; x </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">IntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'x'</span><span class="pun">)</span><span class="pln"><br>&nbsp; y </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">IntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'y'</span><span class="pun">)</span><span class="pln"><br>&nbsp; z </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">IntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'z'</span><span class="pun">)</span></pre>
+    <p>The command <code>solver.NewIntVar(0, var_upper_bound, 'x')</code> creates an integer variable whose values
+      are between 0 and <code>var_upper_bound</code>. Although the problem doesn't impose upper bounds on
+      the individual variables, we still need to supply an upper bound to the solver. So we just choose
+      a value that is large enough that it doesn't change the solutions.
+      Setting the value
+      to the maximum of the constraint upper bounds (shown below) is sufficient.</p>
+
+    <h3 id="constraints_ori">Define the constraints</h3>
+    <p>The following code defines the constraints for the problem.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; solver</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">50</span><span class="pun">)</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">3</span><span class="pun">*</span><span class="pln">x </span><span class="pun">-</span><span class="pln"> </span><span class="lit">5</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">45</span><span class="pun">)</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">5</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">-</span><span class="pln"> </span><span class="lit">6</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span></pre>
+
+     <h3 id="objective_ori">Define the objective function</h3>
+    <p>The following code defines the objective for the problem
+       and declares it to be a maximization problem:
+</p><pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; objective </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Maximize</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span></pre>
+
+    <h3 id="decision_builder">Decision builders</h3>
+    <p>Before calling the solver, you need to create a <i>decision builder</i> for the problem. The
+     decision builder creates the search tree and
+     determines the order in which the solver searches solutions. The following code creates the
+     decision builder using the solver's <code>Phase</code> method.
+      </p><pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; decision_builder </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Phase</span><span class="pun">([</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">,</span><span class="pln"> z</span><span class="pun">],</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solver</span><span class="pun">.</span><span class="pln">CHOOSE_FIRST_UNBOUND</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solver</span><span class="pun">.</span><span class="pln">ASSIGN_MAX_VALUE</span><span class="pun">)</span></pre>
+
+    <p>The <code>Phase</code> method has three input parameters:</p>
+    <ul>
+      <li>The first parameter contains the <i>decision variables</i> — the variables
+        the solver uses to decide
+        which node of the tree to visit next. In this case, the decision variables are
+        x, y and z.</li>
+      <li>The second parameter specifies how the solver chooses the next variable for
+        the search. Here the code uses <code>CHOOSE_FIRST_UNBOUND</code>, which means the solver
+        chooses the first unbound variable. Other options are <code>CHOOSE_LOWEST_MIN</code> and
+        <code>CHOOSE_RANDOM</code>.</li>
+      <li>The third parameter specifies how the solver chooses the next value of the
+        current search variable to check. Here, we've chosen <code>ASSIGN_MAX_VALUE</code>, which
+        means the solver chooses the largest value that hasn't already been searched. We could
+        also have chosen <code>ASSIGN_MIN_VALUE</code> or <code>ASSIGN_RANDOM_VALUE</code>.</li>
+    </ul>
+    <p>In this example, the decision builder doesn't play a crucial role,
+    because the search tree is so small. But in larger problems, choosing the
+    right parameters for the decision builder can speed up the search significantly.
+    </p>
+
+    <h3 id="collector">Create a solution collector</h3>
+    <p>The CP solver normally returns many feasible solutions to an optimization problem. A
+      useful tool for storing these results is the <i>solution collector</i>.
+     The following code shows how to create one.
+</p><pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; collector </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">LastSolutionCollector</span><span class="pun">()</span><span class="pln"><br>&nbsp; </span><span class="com"># Add the decision variables.</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">x</span><span class="pun">)</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">y</span><span class="pun">)</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">z</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="com"># Add the objective.</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">AddObjective</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="lit">3</span><span class="pun">*</span><span class="pln">z</span><span class="pun">)</span></pre>
+    <p>In this example, the solution collector stores just the last solution returned by
+    the solver. Since this is a maximization problem, each solution returned by the solver has a larger
+    objective value than the previous one. As a result,
+    the last solution returned by the solver is the optimal solution.</p>
+
+    <h3 id="solution_ori">Call the solver</h3>
+    <p>The following code calls the solver and displays the results.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">(</span><span class="pln">decision_builder</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="pln">objective</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">])</span><span class="pln"><br>&nbsp; </span><span class="kwd">if</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">SolutionCount</span><span class="pun">()</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; best_solution </span><span class="pun">=</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">SolutionCount</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">"Maximum of objective function:"</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">ObjectiveValue</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">()</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'x= '</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'y= '</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'z= '</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">,</span><span class="pln"> z</span><span class="pun">))</span></pre>
+    The results of the search, shown below, are the same as the results returned by the MIP solver:
+<pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div>$ <b>python my_projects/int_prog.py</b>
+Optimal objective value = 23
+
+x = 3
+y = 2</pre>
+    <p>If you want to see all solutions returned by the solver, rather than just the optimal one,
+      you can use the <code>AllSolutionCollector</code> as follows:
+  </p><pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="pln">&nbsp; collector </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">AllSolutionCollector</span><span class="pun">()</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">x</span><span class="pun">)</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">y</span><span class="pun">)</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">AddObjective</span><span class="pun">(</span><span class="pln">obj_expr</span><span class="pun">)</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">(</span><span class="pln">decision_builder</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="pln">objective</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">])</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="typ">Here</span><span class="str">'s the output of the program:<br></span><pre><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div></div><span class="str">Maximum of objective function: 35<br><br>x value: &nbsp;7<br>y value: &nbsp;3<br>z value: &nbsp;5</span></pre></pre>
+
+<h3 id="program_ori">The entire program</h3>
+    <p>The entire program is shown below.</p>
+<pre class="prettyprint lang-python"><div class="devsite-code-button-wrapper"><div class="devsite-code-button gc-analytics-event material-icons devsite-dark-code-button" data-category="Site-Wide Custom Events" data-label="Dark Code Toggle" track-type="exampleCode" track-name="darkCodeToggle" data-tooltip-align="b,c" data-tooltip="深色代码主题" aria-label="深色代码主题" data-title="深色代码主题"></div><div class="devsite-code-button gc-analytics-event material-icons devsite-click-to-copy-button" data-category="Site-Wide Custom Events" data-label="Click To Copy" track-type="exampleCode" track-name="clickToCopy" data-tooltip-align="b,c" data-tooltip="点击复制" aria-label="点击复制" data-title="点击复制"></div></div><span class="kwd">from</span><span class="pln"> __future__ </span><span class="kwd">import</span><span class="pln"> print_function<br></span><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">constraint_solver </span><span class="kwd">import</span><span class="pln"> pywrapcp<br></span><span class="kwd">from</span><span class="pln"> ortools</span><span class="pun">.</span><span class="pln">constraint_solver </span><span class="kwd">import</span><span class="pln"> solver_parameters_pb2<br><br></span><span class="kwd">def</span><span class="pln"> main</span><span class="pun">():</span><span class="pln"><br>&nbsp; </span><span class="com"># Instantiate a CP solver.</span><span class="pln"><br>&nbsp; parameters </span><span class="pun">=</span><span class="pln"> pywrapcp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">.</span><span class="typ">DefaultSolverParameters</span><span class="pun">()</span><span class="pln"><br>&nbsp; solver </span><span class="pun">=</span><span class="pln"> pywrapcp</span><span class="pun">.</span><span class="typ">Solver</span><span class="pun">(</span><span class="str">'simple_CP'</span><span class="pun">,</span><span class="pln"> parameters</span><span class="pun">)</span><span class="pln"><br>&nbsp; var_upper_bound </span><span class="pun">=</span><span class="pln"> max</span><span class="pun">(</span><span class="lit">50</span><span class="pun">,</span><span class="pln"> </span><span class="lit">45</span><span class="pun">,</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span><span class="pln"><br>&nbsp; x </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">IntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'x'</span><span class="pun">)</span><span class="pln"><br>&nbsp; y </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">IntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'y'</span><span class="pun">)</span><span class="pln"><br>&nbsp; z </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">IntVar</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> var_upper_bound</span><span class="pun">,</span><span class="pln"> </span><span class="str">'z'</span><span class="pun">)</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">50</span><span class="pun">)</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">3</span><span class="pun">*</span><span class="pln">x </span><span class="pun">-</span><span class="pln"> </span><span class="lit">5</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">7</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">45</span><span class="pun">)</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="lit">5</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">-</span><span class="pln"> </span><span class="lit">6</span><span class="pun">*</span><span class="pln">z </span><span class="pun">&lt;=</span><span class="pln"> </span><span class="lit">37</span><span class="pun">)</span><span class="pln"><br>&nbsp; objective </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Maximize</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="pln"> </span><span class="lit">3</span><span class="pun">*</span><span class="pln">z</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"><br>&nbsp; decision_builder </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">Phase</span><span class="pun">([</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">,</span><span class="pln"> z</span><span class="pun">],</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solver</span><span class="pun">.</span><span class="pln">CHOOSE_FIRST_UNBOUND</span><span class="pun">,</span><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; solver</span><span class="pun">.</span><span class="pln">ASSIGN_MAX_VALUE</span><span class="pun">)</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="com"># Create a solution collector.</span><span class="pln"><br>&nbsp; collector </span><span class="pun">=</span><span class="pln"> solver</span><span class="pun">.</span><span class="typ">LastSolutionCollector</span><span class="pun">()</span><span class="pln"><br>&nbsp; </span><span class="com"># Add the decision variables.</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">x</span><span class="pun">)</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">y</span><span class="pun">)</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">Add</span><span class="pun">(</span><span class="pln">z</span><span class="pun">)</span><span class="pln"><br>&nbsp; </span><span class="com"># Add the objective.</span><span class="pln"><br>&nbsp; collector</span><span class="pun">.</span><span class="typ">AddObjective</span><span class="pun">(</span><span class="lit">2</span><span class="pun">*</span><span class="pln">x </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">*</span><span class="pln">y </span><span class="pun">+</span><span class="lit">3</span><span class="pun">*</span><span class="pln">z</span><span class="pun">)</span><span class="pln"><br>&nbsp; solver</span><span class="pun">.</span><span class="typ">Solve</span><span class="pun">(</span><span class="pln">decision_builder</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="pln">objective</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">])</span><span class="pln"><br>&nbsp; </span><span class="kwd">if</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">SolutionCount</span><span class="pun">()</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln"><br>&nbsp; &nbsp; best_solution </span><span class="pun">=</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">SolutionCount</span><span class="pun">()</span><span class="pln"> </span><span class="pun">-</span><span class="pln"> </span><span class="lit">1</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">"Maximum of objective function:"</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">ObjectiveValue</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">()</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'x= '</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'y= '</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">))</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="kwd">print</span><span class="pun">(</span><span class="str">'z= '</span><span class="pun">,</span><span class="pln"> collector</span><span class="pun">.</span><span class="typ">Value</span><span class="pun">(</span><span class="pln">best_solution</span><span class="pun">,</span><span class="pln"> z</span><span class="pun">))</span><span class="pln"><br><br></span><span class="kwd">if</span><span class="pln"> __name__ </span><span class="pun">==</span><span class="pln"> </span><span class="str">'__main__'</span><span class="pun">:</span><span class="pln"><br>&nbsp; main</span><span class="pun">()</span></pre>
+  
+  </div>
+  
+
+  
+        
+  
+
+
+
+
+
+
+
+        
+<div class="devsite-content-footer nocontent">
+  
+  
+    <p>Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, and code samples are licensed under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a>. For details, see our <a href="https://developers.google.cn/terms/site-policies">Site Policies</a>. Java is a registered trademark of Oracle and/or its affiliates.</p>
+  
+
+  
+    
+    <p class="devsite-content-footer-date" itemprop="datePublished" content="2018-11-22T17:26:47.945931">
+      
+      上次更新日期：十一月 22, 2018
+    </p>
+  
+
+</div>
+
+        </article>
+      </article>
+  
+
+        </div>
+      
+
+<footer class="devsite-footer-promos nocontent"><nav class="devsite-full-site-width"><ul class="devsite-footer-promos-list"><li class="devsite-footer-promo"><a href="http://github.com/google/or-tools" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo"><img class="devsite-footer-promo-icon" src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/logo-github.svg">
+          
+          
+            GitHub
+          
+        </a><div class="devsite-footer-promo-description">Download our code</div></li><li class="devsite-footer-promo"><a href="https://groups.google.com/forum/#!forum/or-tools-discuss" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。"><img class="devsite-footer-promo-icon" src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/groups_24dp.png">
+          
+          
+            Discussion forum
+          
+        </a><div class="devsite-footer-promo-description">Visit our forum</div></li><li class="devsite-footer-promo"><a href="http://or-tools.blogspot.com/" class="devsite-footer-promo-title gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Content Page Footer Promo" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。"><img class="devsite-footer-promo-icon" src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/blogger_24dp.png">
+          
+          
+            Blog
+          
+        </a><div class="devsite-footer-promo-description">Read our blog</div></li></ul></nav></footer><footer class="devsite-footer-linkboxes nocontent
+               devsite-footer-linkboxes-all-backup
+               devsite-footer-linkboxes-with-sites"><nav class="devsite-full-site-width"><ul class="devsite-footer-linkboxes-list"><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">社交沟通</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="http://developers.googleblog.cn/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Blog Link">
+                博客
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://www.facebook.com/Google-Developers-967415219957038/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Facebook Link">
+                Facebook
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://plus.google.com/+GoogleDevelopers" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer G+ Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google+
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://medium.com/google-developers" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Medium Link">
+                Medium
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://twitter.com/googledevs" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Twitter Link">
+                Twitter
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://www.youtube.com/channel/UCQqa5UIHtrnpiADC3eHFupw" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer YouTube Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                YouTube
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">计划</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://www.womentechmakers.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Women Techmakers">
+                Women Techmakers
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/agency/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Agency">
+                Agency Program
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/groups/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Groups">
+                GDG
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/experts/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Experts">
+                Google Developers Experts
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/startups/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Startups">
+                Startup Launchpad
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://userresearch.google.com/?reserved=0&amp;utm_source=developers.google.com&amp;Q_Language=en&amp;utm_medium=own_srch&amp;utm_campaign=Global-developers&amp;utm_term=0&amp;utm_content=0&amp;productTag=clou&amp;campaignDate=nov18&amp;pType=devel&amp;referral_code=js564523" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer User Studies" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                User Studies
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-backup"><h3 class="devsite-footer-linkbox-heading">开发者控制台</h3><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://console.developers.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Developers Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google API Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.cloud.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Cloud Platform Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Cloud Platform Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://play.google.com/apps/publish/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Google Play Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Play Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.firebase.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Firebase Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Firebase Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://console.actions.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Actions on Google Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Actions on Google Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://cast.google.com/publish/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Cast SDK Developer Console" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Cast SDK Developer Console
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://chrome.google.com/webstore/developer/dashboard" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Chrome Web Store Developer Dashboard" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Chrome Web Store Dashboard
+            </a></li></ul></li><li class="devsite-footer-linkbox devsite-footer-linkbox-sites"><a href="https://developers.google.cn/" class="gc-analytics-event devsite-footer-linkbox-logo-link" data-category="Site-Wide Custom Events" data-label="Footer Google Developers Link"><img class="devsite-footer-linkbox-logo" src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/lockup-color-knockout.png" alt="Google Developers"></a><ul class="devsite-footer-linkbox-list"><li class="devsite-footer-linkbox-item"><a href="https://developer.android.google.cn/index.html" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Android Link">
+                Android
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developer.chrome.com/home" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Chrome Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Chrome
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://firebase.google.cn/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Firebase Link">
+                Firebase
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://cloud.google.com/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Cloud Link" data-tooltip-align="b,c" data-tooltip="您所在的区域可能无法访问此链接。" aria-label="您所在的区域可能无法访问此链接。">
+                Google Cloud Platform
+            </a></li><li class="devsite-footer-linkbox-item"><a href="https://developers.google.cn/products/" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Footer Products Link">
+                所有产品
+            </a></li></ul></li></ul></nav></footer><footer class="devsite-utility-footer"><nav class="devsite-utility-footer-nav devsite-nav devsite-full-site-width"><div class="devsite-utility-footer-nav-left"><form class="devsite-utility-footer-language" action="https://developers.google.cn/i18n/setlang/" method="post"><input type="hidden" name="xsrf_token" value="03j0sjGz3hebpPpcKRBTVT1_tWv10eO00quLIgtRzr46MTU0NzAxNzU0NjMwNzg2Mg"><input type="hidden" name="next" value="/optimization/mip/integer_opt_cp"><select class="devsite-utility-footer-language-select kd-select" name="language" track-type="languageSelector" track-name="click" style="display: none;"><option value="id" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="id" track-metadata-original-language="zh-cn" track-metadata-selected-language="id">
+            Bahasa Indonesia
+          </option><option value="de" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="de" track-metadata-original-language="zh-cn" track-metadata-selected-language="de">
+            Deutsch
+          </option><option value="en" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="en" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </option><option value="es" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="es" track-metadata-original-language="zh-cn" track-metadata-selected-language="es">
+            español
+          </option><option value="fr" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="fr" track-metadata-original-language="zh-cn" track-metadata-selected-language="fr">
+            français
+          </option><option value="pt-br" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="pt-br" track-metadata-original-language="zh-cn" track-metadata-selected-language="pt-br">
+            Português Brasileiro
+          </option><option value="ru" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ru" track-metadata-original-language="zh-cn" track-metadata-selected-language="ru">
+            Русский
+          </option><option value="ja" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ja" track-metadata-original-language="zh-cn" track-metadata-selected-language="ja">
+            日本語
+          </option><option value="zh-cn" selected="selected" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="zh-cn" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </option><option value="ko" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ko" track-metadata-original-language="zh-cn" track-metadata-selected-language="ko">
+            한국어
+          </option></select><span class="kd-button kd-menubutton kd-select" track-type="languageSelector" track-name="click"><div class="label">
+            简体中文
+          </div><div class="kd-disclosureindicator"></div></span></form><span class="devsite-utility-footer-links"><a class="devsite-utility-footer-link gc-analytics-event" href="https://developers.google.cn/terms/site-terms" data-category="Site-Wide Custom Events" data-label="Footer terms link" data-footer-link-id="terms">条款
+         </a><a class="devsite-utility-footer-link gc-analytics-event" href="https://policies.google.cn/privacy" data-category="Site-Wide Custom Events" data-label="Footer privacy link" data-footer-link-id="privacy" data-cookie-policy="//policies.google.cn/technologies/cookies">隐私权
+         </a></span></div></nav></footer><div class="devsite-feedback-dialog devsite-dialog"><div class="devsite-dialog-contents"><h3>发送以下问题的反馈：</h3><div class="devsite-feedback-item"><a data-type="documentation" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Docs Feedback Image" track-type="feedback" track-name="feedbackDocIcon" track-metadata-position="header"><div class="devsite-feedback-item-icon-container"><div class="devsite-feedback-item-icon-white devsite-feedback-item-icon-docs
+                        material-icons"></div></div></a><div class="devsite-feedback-item-name">
+          
+          此网页
+        </div><div class="devsite-feedback-item-description"><a data-type="documentation" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Docs Feedback Text" track-type="feedback" track-name="feedbackDocText" track-metadata-position="header">
+            
+            文档反馈
+          </a></div></div><div class="devsite-feedback-item"><a data-type="product" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Product Feedback Image" track-type="feedback" track-name="feedbackProductIcon" track-metadata-position="header"><img src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/orLogo.png" class="devsite-feedback-item-icon" alt="OR-Tools"></a><div class="devsite-feedback-item-name">
+        OR-Tools
+        </div><div class="devsite-feedback-item-description"><a data-type="product" tabindex="0" class="gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Product Feedback Text" track-type="feedback" track-name="feedbackProductText" track-metadata-position="header">
+            
+            产品反馈
+          </a></div></div></div><div class="devsite-dialog-buttons"><button type="button" class="devsite-feedback-cancel button-white gc-analytics-event" data-category="Site-Wide Custom Events" data-label="Cancel Feedback Button" track-type="feedback" track-name="cancelFeedbackButton" track-metadata-position="header">
+        
+        取消
+      </button></div></div><script>
+  $(document).ready(function() {
+    new devsite.feedback.Widget({
+        'product_id': '106275',
+        'bucket': '',
+        'context': 'DevSite feedback link',
+        'version': 'devsite-20190107-r00-rc01.default'
+      },
+      document.querySelectorAll('.devsite-feedback-button'),
+      'zh-cn',
+      document.querySelector('.devsite-site-mask'),
+      document.querySelector('.devsite-feedback-dialog'),
+      document.querySelector('.devsite-feedback-cancel'),
+      document.querySelectorAll('.devsite-feedback-item a:not([href])')
+    );
+  });
+  </script></div><script async="" defer="" src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/api.js"></script><script src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/saved_resource"></script><script src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/script_foot_closure__zh_cn.js"></script><script src="./CP Approach to Integer Optimization  _  OR-Tools  _  Google Developers_files/script_foot.js"></script><script>
+        (function($) {
+          
+          devsite.devsite.Init($, {'ENABLE_BLOCKED_VIDEO_PLACEHOLDER': 1, 'SITE_NAME': 'devsite_china', 'FULL_SITE_SEARCH_ENABLED': 0, 'ENABLE_CLOUDTRACK': 0, 'VTAGS_ENABLED': 0, 'HISTORY_ENABLED': 0, 'SIDEBAR_MINI_ENABLED': 0, 'VERSION_HASH': '0ee1984e83', 'SCRIPTSAFE_DOMAIN': 'google-developers.gonglchuangl.net', 'ENABLE_BLOCKED_LINK_TOOLTIP': 1, 'ALLOWED_HOSTS': ['.android.com', '.appspot.com', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.tensorflow.org'], 'BLOCK_RSS_FEEDS': 1},
+                               '[]','zh-cn',
+                               true, '',
+                               {"8e03e230de0bd8a6fe173fdf172e8b3f": true, "8de7a048f21618359bd37f5ce44be073": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "d169d485cf24243a263783dbe42029b1": true, "039e5d84b87fd75807ffb37b7f1bbf2c": true, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true, "098dafe57affddc137df300142652cfd": false}, '/optimization/',
+                               'https://developers.google.cn/');
+        })(jQuery);
+
+        
+        devsite.localInit = function() {
+          
+        };
+
+      </script><script>
+      $('.devsite-utility-footer-language-select').each(function() {
+        $(this).change(function(){$('.devsite-utility-footer-language').submit();});
+      });
+      </script></div><span id="devsite-request-elapsed" data-request-elapsed="231.975078583"></span>
+<ul class="kd-menulist devsite-hidden" style="left: 23.9946px; right: auto; top: 8177.66px;"><li class="kd-menulistitem" value="id" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="id" track-metadata-original-language="zh-cn" track-metadata-selected-language="id">
+            Bahasa Indonesia
+          </li><li class="kd-menulistitem" value="de" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="de" track-metadata-original-language="zh-cn" track-metadata-selected-language="de">
+            Deutsch
+          </li><li class="kd-menulistitem" value="en" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="en" track-metadata-original-language="zh-cn" track-metadata-selected-language="en">
+            English
+          </li><li class="kd-menulistitem" value="es" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="es" track-metadata-original-language="zh-cn" track-metadata-selected-language="es">
+            español
+          </li><li class="kd-menulistitem" value="fr" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="fr" track-metadata-original-language="zh-cn" track-metadata-selected-language="fr">
+            français
+          </li><li class="kd-menulistitem" value="pt-br" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="pt-br" track-metadata-original-language="zh-cn" track-metadata-selected-language="pt-br">
+            Português Brasileiro
+          </li><li class="kd-menulistitem" value="ru" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ru" track-metadata-original-language="zh-cn" track-metadata-selected-language="ru">
+            Русский
+          </li><li class="kd-menulistitem" value="ja" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ja" track-metadata-original-language="zh-cn" track-metadata-selected-language="ja">
+            日本語
+          </li><li class="kd-menulistitem devsite-selected-option" value="zh-cn" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="zh-cn" track-metadata-original-language="zh-cn" track-metadata-selected-language="zh-cn">
+            简体中文
+          </li><li class="kd-menulistitem" value="ko" track-type="languageSelector" track-name="changed" track-metadata-eventdetail="ko" track-metadata-original-language="zh-cn" track-metadata-selected-language="ko">
+            한국어
+          </li></ul></body></html>

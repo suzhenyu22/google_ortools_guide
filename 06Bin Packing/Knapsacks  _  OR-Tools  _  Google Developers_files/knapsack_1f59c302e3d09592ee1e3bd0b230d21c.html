@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!-- saved from url=(0116)https://google-developers.gonglchuangl.net/optimization/bin/knapsack_1f59c302e3d09592ee1e3bd0b230d21c.frame?hl=zh-cn -->
+<html ml-update="aware"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Google Developers</title>
+    
+  
+    <link href="./css(1)" rel="stylesheet">
+    <link rel="stylesheet" href="./devsite-cyan.css">
+    
+    <script type="text/javascript" async="" src="./linkid.js"></script><script async="" src="./analytics.js"></script><script src="./prettify-bundle.js"></script>
+  
+
+    <meta name="robots" content="noindex">
+    <script src="./jquery-bundle(1).js"></script>
+    <script src="./jsapi"></script>
+    
+    <script src="./framebox.js"></script>
+  </head>
+  <body class="devsite-layout-docs devsite-framebox no-touch">
+<p style="display: none; height: 0; width: 0">This is a snippet from developers.google.com</p>
+
+<canvas id="canvas" width="500" height="500">
+</canvas>
+<script>
+var canvas;
+var ctx;
+var x = 500;
+var y = 500;
+var dx = 1;
+var dy = 2;
+var ticks = 0;
+var WIDTH = 500;
+var HEIGHT = 500;
+var WEIGHT_MIN = 20; // Ensure that circles aren't too small.
+var MARGIN_LEFT = 20;
+var MARGIN_TOP = 50;
+
+var KNAPSACK_BUFFER = 25;
+var KNAPSACK_CEILING = 50;
+var KNAPSACK_WIDTH = 200;
+var KNAPSACK_HEIGHT = 90;
+
+// Bottom limit for items.
+var KNAPSACK_SINK_Y = 463;
+
+var KNAPSACK_DEPTH_X = 20;
+
+var KNAPSACK_SINK_THRESHOLD = 10;
+
+// Make sure that the parabolic paths aren't skinnier than this.
+var SKINNY = 80;
+
+var knapsackSinkThreshold = KNAPSACK_SINK_THRESHOLD;
+var cumulativeValue = 0;
+var cumulativeWeight = 0;
+
+var values = [360, 83, 59, 130, 431, 67, 230, 52, 93,
+               125, 670, 892, 600, 38, 48, 147, 78, 256,
+               63, 17, 120, 164, 432, 35, 92, 110, 22,
+               42, 50, 323, 514, 28, 87, 73, 78, 15,
+               26, 78, 210, 36, 85, 189, 274, 43, 33,
+               10, 19, 389, 276, 312];
+
+var weights = [7, 0, 30, 22, 80, 94, 11, 81, 70,
+               64, 59, 18, 0, 36, 3, 8, 15, 42,
+               9, 0, 42, 47, 52, 32, 26, 48, 55,
+               6, 29, 84, 2, 4, 18, 56, 7, 29,
+               93, 44, 71, 3, 86, 66, 31, 65, 0,
+               79, 20, 65, 52, 13];
+
+var color_lut = ['#e2431e', '#d3362d', '#e7711b', '#e49307',
+		 '#f1ca3a', '#b9c246', '#6f9654', '#1a8763',
+		 '#1c91c0', '#4374e0', '#43459d', '#5c3292',
+		 '#871b47', '#572a1a'];
+var colors = [];
+var packed = [];
+var locations = [];
+var directions = [];
+var destinations = [];
+var coordinates = [];
+
+// Hardcoded answers found to the above problem, calculated with OR-Tools.
+var selected = [true, true, false, true, true, false, true, false,
+false, false, true, true, true, false, true, true, true, true, true,
+true, false, true, true, false, true, false, false, true, true, true,
+true, true, true, false, true, false, false, false, true, true, false,
+true, true, false, true, false, false, true, true, true];
+
+function item(x, y, r, value, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI*2, true);
+  var grd = ctx.createRadialGradient(x, y, r, x + r, y - r, r/2);
+  grd.addColorStop(0, color);
+  grd.addColorStop(1, "#fafafa");
+  ctx.fillStyle = grd;
+  ctx.fill();
+  ctx.fillStyle = '#000';
+  ctx.font = "12px Arial";
+  ctx.fillText(value, x - 4 * Math.log(value)/Math.log(10),
+	       y + 4);
+}
+
+function knapsack_front() {
+  ctx.beginPath();
+  ctx.lineWidth = 4;
+  ctx.rect(150, 400, KNAPSACK_WIDTH, KNAPSACK_HEIGHT);
+  ctx.fillStyle = 'rgba(110, 110, 110, 0.5)';
+  ctx.fill();
+  ctx.stroke();
+}
+
+function knapsack_back() {
+  ctx.lineWidth = 3;
+
+  var grd = ctx.createLinearGradient(150, 380, 150, 400);
+  grd.addColorStop(0, '#ccc');
+  grd.addColorStop(1, '#444');
+
+  ctx.beginPath();
+  ctx.moveTo(150, 400);
+  ctx.lineTo(150 + KNAPSACK_DEPTH_X, 380);
+  ctx.lineTo(150 + KNAPSACK_WIDTH - KNAPSACK_DEPTH_X, 380);
+  ctx.lineTo(150 + KNAPSACK_WIDTH, 400);
+  ctx.closePath();
+  ctx.fillStyle = grd;
+  ctx.fill();
+  ctx.stroke();
+}
+
+function rect(x, y, w, h) {
+  ctx.beginPath();
+  ctx.rect(x, y, w, h);
+  ctx.closePath();
+  ctx.fill();
+}
+
+function clear() {
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
+}
+
+function init() {
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
+  reset();
+  return setInterval(draw, 15);
+}
+
+function reset() {
+  colors = [];
+  packed = [];
+  locations = [];
+  directions = [];
+  destinations = [];
+  coordinates = [];
+  knapsackSinkThreshold = 10;
+  cumulativeValue = 0;
+  cumulativeWeight = 0;
+
+  for (i = 0; i < weights.length; i++) {
+    packed.push(false);
+    colors.push(color_lut[Math.floor(color_lut.length * Math.random())]);
+
+    cx = WIDTH / 2;
+    if (Math.random() < 0.5) {
+      // Start position to the left of the knapsack.
+      x0 = (cx - (KNAPSACK_WIDTH / 2) - 2 * KNAPSACK_BUFFER) * Math.random() +
+	  KNAPSACK_BUFFER;
+      directions.push(1);
+    } else {
+      // Start position to the right of the knapsack.
+      x0 = (cx - (KNAPSACK_WIDTH / 2) - 2 * KNAPSACK_BUFFER) * Math.random() +
+	  cx + (KNAPSACK_WIDTH / 2) + KNAPSACK_BUFFER;
+      directions.push(-1);
+    }
+    xf = (KNAPSACK_WIDTH - 2 * KNAPSACK_BUFFER) * Math.random() +
+	cx - (KNAPSACK_WIDTH / 2) + KNAPSACK_BUFFER;
+    // Ensure that x0 and xf aren't too close together.
+    // If they are, the item whips so fast through the parabola
+    // that it falls through the floor.
+    if ((xf > x0) && (xf - x0) < SKINNY) {
+      xf += SKINNY / 2;
+    } else if ((xf < x0) && (x0 - xf) < SKINNY) {
+      xf -= SKINNY / 2;
+    }
+
+    var y0 = KNAPSACK_SINK_Y;
+    var yf = y0;
+
+    locations.push([x0, y0]);
+
+    // Compute coordinates of the parabola that selected
+    // blocks are to follow.
+    //
+    // First, pick the midpoint of the parabola.
+    var xm = (x0 + xf) / 2;
+    var ym = KNAPSACK_CEILING;
+
+    var b = yf - y0;
+    b -= (ym - y0) * (xf * xf - x0 * x0) / (xm * xm - x0 * x0);
+    b /= (xf - x0 - ((xm - x0) * (xf * xf - x0 * x0) / (xm * xm - x0 * x0)));
+    var a = (ym - y0 - b * (xm - x0)) / (xm * xm - x0 * x0);
+    var c = y0 - a * xf * xf - b * xf;
+
+    coordinates.push([a, b, c]);
+    destinations.push([xf, yf]);x
+  }
+}
+
+function draw() {
+  if (ticks > 1000) {
+    reset();
+    ticks = 0;
+  } else {
+    ticks++;
+  }
+  clear();
+  knapsack_back();
+
+  for (i = 0; i < weights.length; i++) {
+    if (selected[i] && !packed[i]) {
+      if ((Math.abs(locations[i][0] - destinations[i][0]) >
+	  knapsackSinkThreshold) ||
+	  (Math.abs(locations[i][1] - destinations[i][1]) >
+	  knapsackSinkThreshold)) {
+	if (directions[i] == 1) {
+	  locations[i][0] += dx;
+	} else {
+	  locations[i][0] -= dx;
+	}
+      } else { // The item is at rest.
+	packed[i] = true;
+	cumulativeValue += values[i];
+	cumulativeWeight += weights[i];
+	knapsackSinkThreshold += 1.4;
+      }
+
+      locations[i][1] = coordinates[i][0] * locations[i][0] * locations[i][0] +
+	  coordinates[i][1] * locations[i][0] + coordinates[i][2];
+    }
+    item(locations[i][0], locations[i][1],
+	 2.75 * Math.sqrt(weights[i] > WEIGHT_MIN ? weights[i] : WEIGHT_MIN),
+	 values[i], colors[i]);
+  }
+  ctx.font = "24px Arial";
+  ctx.fillStyle = '#888';
+  ctx.fillText("Weight: " + cumulativeWeight,
+	       MARGIN_LEFT, MARGIN_TOP);
+  ctx.fillText("Value: " + cumulativeValue,
+	       MARGIN_LEFT, MARGIN_TOP + 36);
+
+  knapsack_front();
+}
+
+init();
+</script>
+
+
+
+    
+
+
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {}, &quot;gaid&quot;: &quot;UA-10115507-7&quot;}">
+  
+    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: null, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension8&quot;: &quot;scriptsafe&quot;, &quot;dimension1&quot;: &quot;Signed out&quot;}, &quot;gaid&quot;: &quot;UA-24532603-11&quot;}">
+  
+
+
+
+  
+  
+    <script>
+      var dataLayer = [{"freeTrialEligibleUser": "False", "userCountry": "CN", "language": {"requested": "zh-cn", "served": null}, "projectName": null, "scriptsafe": "scriptsafe", "signedIn": "False", "internalUser": "False"}];
+    </script>
+  
+
+
+
+    <script>
+      
+      window.onload = function() {
+          // Initialize the settings variables we get from the server side
+        devsite.settings.initSettings({'ENABLE_BLOCKED_VIDEO_PLACEHOLDER': 1, 'SITE_NAME': 'devsite_china', 'FULL_SITE_SEARCH_ENABLED': 0, 'ENABLE_CLOUDTRACK': 0, 'VTAGS_ENABLED': 0, 'HISTORY_ENABLED': 0, 'SIDEBAR_MINI_ENABLED': 0, 'VERSION_HASH': '0ee1984e83', 'SCRIPTSAFE_DOMAIN': 'google-developers.gonglchuangl.net', 'ENABLE_BLOCKED_LINK_TOOLTIP': 1, 'ALLOWED_HOSTS': ['.android.com', '.appspot.com', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.tensorflow.org'], 'BLOCK_RSS_FEEDS': 1} || {});
+        // DevsiteUtilParams rely on devsite.settings.
+        devsite.utils.initDevsiteUtilParams('https://google-developers.gonglchuangl.net/?hl=zh-cn',
+            devsite.settings['ALLOWED_HOSTS'].concat('youtube.com'));
+        devsite.permissions.init({"8e03e230de0bd8a6fe173fdf172e8b3f": true, "8de7a048f21618359bd37f5ce44be073": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "d169d485cf24243a263783dbe42029b1": true, "039e5d84b87fd75807ffb37b7f1bbf2c": true, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true, "098dafe57affddc137df300142652cfd": false});
+        devsite.base.init(null, null, top, false);
+        
+        devsite.analytics.InitAnalytics(true);
+
+        
+      }
+
+      
+    </script>
+  
+
+
+</body></html>

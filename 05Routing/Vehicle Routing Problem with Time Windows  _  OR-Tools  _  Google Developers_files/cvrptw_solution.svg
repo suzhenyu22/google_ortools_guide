@@ -1,0 +1,142 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"
+width="1020" height="748" viewBox="-54 -54 1020 748">
+<!-- Need this definition to make an arrow marker, from https://www.w3.org/TR/svg-markers/ -->
+<defs>
+  <marker id="arrow_blue" viewBox="0 0 16 16" refX="8" refY="8" markerUnits="strokeWidth" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M 0 0 L 16 8 L 0 16 z" stroke="none" fill="#4285F4"/>
+  </marker>
+  <marker id="arrow_red" viewBox="0 0 16 16" refX="8" refY="8" markerUnits="strokeWidth" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M 0 0 L 16 8 L 0 16 z" stroke="none" fill="#EA4335"/>
+  </marker>
+  <marker id="arrow_yellow" viewBox="0 0 16 16" refX="8" refY="8" markerUnits="strokeWidth" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M 0 0 L 16 8 L 0 16 z" stroke="none" fill="#FBBC05"/>
+  </marker>
+  <marker id="arrow_green" viewBox="0 0 16 16" refX="8" refY="8" markerUnits="strokeWidth" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M 0 0 L 16 8 L 0 16 z" stroke="none" fill="#34A853"/>
+  </marker>
+  <marker id="arrow_black" viewBox="0 0 16 16" refX="8" refY="8" markerUnits="strokeWidth" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M 0 0 L 16 8 L 0 16 z" stroke="none" fill="#101010"/>
+  </marker>
+  <marker id="arrow_white" viewBox="0 0 16 16" refX="8" refY="8" markerUnits="strokeWidth" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M 0 0 L 16 8 L 0 16 z" stroke="none" fill="#FFFFFF"/>
+  </marker>
+</defs>
+<!-- Print city streets -->
+<line x1="0" y1="0" x2="912" y2="0" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="80" x2="912" y2="80" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="160" x2="912" y2="160" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="240" x2="912" y2="240" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="320" x2="912" y2="320" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="400" x2="912" y2="400" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="480" x2="912" y2="480" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="560" x2="912" y2="560" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="640" x2="912" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="0" y1="0" x2="0" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="114" y1="0" x2="114" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="228" y1="0" x2="228" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="342" y1="0" x2="342" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="456" y1="0" x2="456" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="570" y1="0" x2="570" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="684" y1="0" x2="684" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="798" y1="0" x2="798" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<line x1="912" y1="0" x2="912" y2="640" style="stroke-width:2;stroke:#969696;fill:none"/>
+<!-- Print time windows -->
+<text x="228" y="-41.6" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[75, 85]</text>
+<text x="912" y="-41.6" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[75, 85]</text>
+<text x="0" y="38.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[60, 70]</text>
+<text x="114" y="38.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[45, 55]</text>
+<text x="570" y="118.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[0, 8]</text>
+<text x="798" y="118.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[50, 60]</text>
+<text x="342" y="198.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[0, 10]</text>
+<text x="684" y="198.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[10, 20]</text>
+<text x="570" y="358.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[0, 10]</text>
+<text x="912" y="358.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[75, 85]</text>
+<text x="114" y="438.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[85, 95]</text>
+<text x="228" y="438.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[5, 15]</text>
+<text x="342" y="518.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[15, 25]</text>
+<text x="684" y="518.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[10, 20]</text>
+<text x="0" y="598.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[45, 55]</text>
+<text x="798" y="598.4" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:none;fill:black">[30, 40]</text>
+<!-- Print routes -->
+<!-- Print route 0 -->
+<polyline points="456,320 342,400 228,480" style="stroke-width:6;stroke:#4285F4;fill:none;marker-mid:url(#arrow_blue)"/>
+<polyline points="228,480 285,520 342,560" style="stroke-width:6;stroke:#4285F4;fill:none;marker-mid:url(#arrow_blue)"/>
+<polyline points="342,560 171,600 0,640" style="stroke-width:6;stroke:#4285F4;fill:none;marker-mid:url(#arrow_blue)"/>
+<polyline points="0,640 57,560 114,480" style="stroke-width:6;stroke:#4285F4;fill:none;marker-mid:url(#arrow_blue)"/>
+<polyline points="114,480 285,400 456,320" style="stroke-width:6;stroke:#4285F4;fill:none;marker-mid:url(#arrow_blue)"/>
+<circle cx="228" cy="480" r="26" style="stroke-width:6;stroke:#4285F4;fill:white"/>
+<text x="228" y="480" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#4285F4">12</text>
+<circle cx="342" cy="560" r="26" style="stroke-width:6;stroke:#4285F4;fill:white"/>
+<text x="342" y="560" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#4285F4">13</text>
+<circle cx="0" cy="640" r="26" style="stroke-width:6;stroke:#4285F4;fill:white"/>
+<text x="0" y="640" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#4285F4">15</text>
+<circle cx="114" cy="480" r="26" style="stroke-width:6;stroke:#4285F4;fill:white"/>
+<text x="114" y="480" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#4285F4">11</text>
+<!-- Print route 1 -->
+<polyline points="456,320 513,240 570,160" style="stroke-width:6;stroke:#EA4335;fill:none;marker-mid:url(#arrow_red)"/>
+<polyline points="570,160 627,200 684,240" style="stroke-width:6;stroke:#EA4335;fill:none;marker-mid:url(#arrow_red)"/>
+<polyline points="684,240 741,200 798,160" style="stroke-width:6;stroke:#EA4335;fill:none;marker-mid:url(#arrow_red)"/>
+<polyline points="798,160 855,80 912,0" style="stroke-width:6;stroke:#EA4335;fill:none;marker-mid:url(#arrow_red)"/>
+<polyline points="912,0 684,160 456,320" style="stroke-width:6;stroke:#EA4335;fill:none;marker-mid:url(#arrow_red)"/>
+<circle cx="570" cy="160" r="26" style="stroke-width:6;stroke:#EA4335;fill:white"/>
+<text x="570" y="160" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#EA4335">5</text>
+<circle cx="684" cy="240" r="26" style="stroke-width:6;stroke:#EA4335;fill:white"/>
+<text x="684" y="240" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#EA4335">8</text>
+<circle cx="798" cy="160" r="26" style="stroke-width:6;stroke:#EA4335;fill:white"/>
+<text x="798" y="160" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#EA4335">6</text>
+<circle cx="912" cy="0" r="26" style="stroke-width:6;stroke:#EA4335;fill:white"/>
+<text x="912" y="0" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#EA4335">2</text>
+<!-- Print route 2 -->
+<polyline points="456,320 399,280 342,240" style="stroke-width:6;stroke:#FBBC05;fill:none;marker-mid:url(#arrow_yellow)"/>
+<polyline points="342,240 228,160 114,80" style="stroke-width:6;stroke:#FBBC05;fill:none;marker-mid:url(#arrow_yellow)"/>
+<polyline points="114,80 57,80 0,80" style="stroke-width:6;stroke:#FBBC05;fill:none;marker-mid:url(#arrow_yellow)"/>
+<polyline points="0,80 114,40 228,0" style="stroke-width:6;stroke:#FBBC05;fill:none;marker-mid:url(#arrow_yellow)"/>
+<polyline points="228,0 342,160 456,320" style="stroke-width:6;stroke:#FBBC05;fill:none;marker-mid:url(#arrow_yellow)"/>
+<circle cx="342" cy="240" r="26" style="stroke-width:6;stroke:#FBBC05;fill:white"/>
+<text x="342" y="240" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#FBBC05">7</text>
+<circle cx="114" cy="80" r="26" style="stroke-width:6;stroke:#FBBC05;fill:white"/>
+<text x="114" y="80" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#FBBC05">4</text>
+<circle cx="0" cy="80" r="26" style="stroke-width:6;stroke:#FBBC05;fill:white"/>
+<text x="0" y="80" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#FBBC05">3</text>
+<circle cx="228" cy="0" r="26" style="stroke-width:6;stroke:#FBBC05;fill:white"/>
+<text x="228" y="0" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#FBBC05">1</text>
+<!-- Print route 3 -->
+<polyline points="456,320 513,360 570,400" style="stroke-width:6;stroke:#34A853;fill:none;marker-mid:url(#arrow_green)"/>
+<polyline points="570,400 627,480 684,560" style="stroke-width:6;stroke:#34A853;fill:none;marker-mid:url(#arrow_green)"/>
+<polyline points="684,560 741,600 798,640" style="stroke-width:6;stroke:#34A853;fill:none;marker-mid:url(#arrow_green)"/>
+<polyline points="798,640 855,520 912,400" style="stroke-width:6;stroke:#34A853;fill:none;marker-mid:url(#arrow_green)"/>
+<polyline points="912,400 684,360 456,320" style="stroke-width:6;stroke:#34A853;fill:none;marker-mid:url(#arrow_green)"/>
+<circle cx="570" cy="400" r="26" style="stroke-width:6;stroke:#34A853;fill:white"/>
+<text x="570" y="400" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#34A853">9</text>
+<circle cx="684" cy="560" r="26" style="stroke-width:6;stroke:#34A853;fill:white"/>
+<text x="684" y="560" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#34A853">14</text>
+<circle cx="798" cy="640" r="26" style="stroke-width:6;stroke:#34A853;fill:white"/>
+<text x="798" y="640" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#34A853">16</text>
+<circle cx="912" cy="400" r="26" style="stroke-width:6;stroke:#34A853;fill:white"/>
+<text x="912" y="400" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#34A853">10</text>
+<!-- Print depot -->
+<circle cx="456" cy="320" r="26" style="stroke-width:6;stroke:#101010;fill:white"/>
+<text x="456" y="320" dy="8" style="text-anchor:middle;font-weight:bold;font-size:26;stroke:none;fill:#101010">0</text>
+
+<!-- Print time window routes -->
+<!-- Print time window route 0 -->
+<text x="228" y="526.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#4285F4">[5, 13]</text>
+<text x="342" y="606.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#4285F4">[17, 25]</text>
+<text x="0" y="686.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#4285F4">[45, 52]</text>
+<text x="114" y="526.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#4285F4">[88, 95]</text>
+<!-- Print time window route 1 -->
+<text x="570" y="206.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#EA4335">[3, 6]</text>
+<text x="684" y="286.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#EA4335">[15, 18]</text>
+<text x="798" y="206.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#EA4335">[57, 60]</text>
+<text x="912" y="46.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#EA4335">[80, 85]</text>
+<!-- Print time window route 2 -->
+<text x="342" y="286.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#FBBC05">[2, 5]</text>
+<text x="114" y="126.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#FBBC05">[46, 49]</text>
+<text x="0" y="126.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#FBBC05">[67, 70]</text>
+<text x="228" y="46.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#FBBC05">[80, 85]</text>
+<!-- Print time window route 3 -->
+<text x="570" y="446.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#34A853">[2, 10]</text>
+<text x="684" y="606.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#34A853">[10, 18]</text>
+<text x="798" y="686.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#34A853">[32, 40]</text>
+<text x="912" y="446.8" dy="6.5" style="text-anchor:middle;font-weight:bold;font-size:19.5;stroke:white;fill:#34A853">[76, 85]</text>
+</svg>
